@@ -19,7 +19,6 @@ export default function AdminLayout({
   return (
     <div className="relative flex min-h-screen flex-col bg-slate-100/40 font-sans">
       {/* Top Header - Sticky across admin pages */}
-      <TopBar onMenuClick={() => setIsSidebarOpen(!isSidebarOpen)} />
 
       <div className="flex flex-1">
         {/* Mobile Sidebar Backdrop Overlay */}

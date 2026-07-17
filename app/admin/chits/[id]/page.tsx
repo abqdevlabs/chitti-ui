@@ -2,6 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { useParams } from "next/navigation";
 import { CardForm } from "./CardForm";
+import { FloatingTransliteratePad } from "@/components/floatingtranslate";
 
 export default function ChitDetail() {
   const param = useParams().id;
@@ -9,6 +10,7 @@ export default function ChitDetail() {
     <div>
       <Button>Generate Card</Button>
       <CardForm />
+      <FloatingTransliteratePad />
     </div>
   );
 }
