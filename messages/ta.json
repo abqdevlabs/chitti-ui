@@ -1,0 +1,38 @@
+{
+  "memberRegistration": {
+    "sections": {
+      "personal": {
+        "title": "தனிப்பட்ட தகவல்கள்",
+        "description": "உறுப்பினரின் அடிப்படை விவரங்களை உள்ளிடவும்."
+      },
+      "kyc": {
+        "title": "KYC தகவல்கள்",
+        "description": "அடையாளச் சரிபார்ப்பு ஆவணங்களை வழங்கவும்."
+      },
+      "nominee": {
+        "title": "நியமனதாரர் தகவல்கள்",
+        "description": "தேவைப்பட்டால் நன்மைகளைப் பெறும் நபரின் விவரங்கள்."
+      }
+    },
+    "fields": {
+      "fullName": "முழு பெயர்",
+      "email": "மின்னஞ்சல் முகவரி",
+      "mobile": "மொபைல் எண்",
+      "dob": "பிறந்த தேதி",
+      "aadhaar": "ஆதார் எண்",
+      "pan": "PAN எண்",
+      "document": "ஆதார் / PAN ஆவணம்",
+      "nomineeName": "நியமனதாரர் பெயர்",
+      "relation": "உறவு"
+    },
+    "placeholders": {
+      "fullName": "ஜான் டோ",
+      "email": "john@example.com",
+      "mobile": "+91 9876543210",
+      "aadhaar": "1234 5678 9012",
+      "pan": "ABCDE1234F",
+      "nomineeName": "ஜேன் டோ",
+      "relation": "மனைவி"
+    }
+  }
+}
