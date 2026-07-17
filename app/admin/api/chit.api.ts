@@ -7,3 +7,10 @@ export async function CreateChit(data: AddChit) {
     return res.data;
   } catch {}
 }
+
+export async function GetChitList() {
+  try {
+    const res = await api.get("/chit/list");
+    return res.data;
+  } catch {}
+}

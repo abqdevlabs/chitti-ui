@@ -18,8 +18,13 @@
         "name": "next"
       }
     ],
+
     "paths": {
-      "@app*": ["./app*"]
+      "@*": ["./app*"],
+      "@app*": ["./app*"],
+      "components": ["./app/components"],
+      "utils": ["./app/lib/utils"],
+      "ui": ["./app/components/ui"]
     }
   },
   "include": [

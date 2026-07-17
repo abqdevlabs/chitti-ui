@@ -1,4 +1,29 @@
 {
+  "cardForm": {
+    "title": "அட்டையை உருவாக்கு",
+    "description": "கட்டமைப்பை அமைக்க முதன்மை விவரங்களை உள்ளிடவும்.",
+    "fields": {
+      "fullName": "முழு பெயர்",
+      "fullNamePlaceholder": "தீபாவளி சீட்டு",
+      "groupNo": "குருப் நெ",
+      "cycleNo": "தவணை நெ",
+      "date": "தேதி",
+      "time": "நேரம்",
+      "cycleNoPlaceholder": "12",
+      "timePlaceholder": "இரவு 9 மணி",
+      "total": "மொத்தம்",
+      "totalPlaceholder": "10,00,000",
+      "auctionedAmount": "ஏலத் தொகை",
+      "auctionedAmountPlaceholder": "10,000",
+      "duePayment": "செலுத்த வேண்டிய தொகை",
+      "duePaymentPlaceholder": "5,000",
+      "discountAmount": "கசர் தொகை",
+      "discountAmountPlaceholder": "5,000"
+    },
+    "actions": {
+      "submit": "கட்டமைப்பு அட்டையை உருவாக்கு"
+    }
+  },
   "chitRegistration": {
     "sections": {
       "basic": {
@@ -7,7 +32,7 @@
       },
       "finance": {
         "title": "நிதி விவரங்கள்",
-        "description": "மாத தவணை, உறுப்பினர் எண்ணிக்கை மற்றும் கமிஷனை அமைக்கவும்."
+        "description": "மாத தவணை, உறுப்பினர் நெணிக்கை மற்றும் கமிஷனை அமைக்கவும்."
       }
     },
     "fields": {
@@ -36,6 +61,12 @@
     }
   },
   "memberRegistration": {
+    "create": {
+      "title": "Add Members",
+      "selectall": "Select All",
+      "add": "Add Member",
+      "description": "Assign members to the Chit"
+    },
     "sections": {
       "personal": {
         "title": "தனிப்பட்ட தகவல்கள்",
@@ -53,10 +84,10 @@
     "fields": {
       "fullName": "முழு பெயர்",
       "email": "மின்னஞ்சல் முகவரி",
-      "mobile": "மொபைல் எண்",
+      "mobile": "மொபைல் நெ",
       "dob": "பிறந்த தேதி",
-      "aadhaar": "ஆதார் எண்",
-      "pan": "PAN எண்",
+      "aadhaar": "ஆதார் நெ",
+      "pan": "PAN நெ",
       "document": "ஆதார் / PAN ஆவணம்",
       "nomineeName": "நியமனதாரர் பெயர்",
       "relation": "உறவு"

@@ -1,4 +1,29 @@
 {
+  "cardForm": {
+    "title": "Generate Card",
+    "description": "Enter the primary details to set up the configuration.",
+    "fields": {
+      "fullName": "Full Name",
+      "fullNamePlaceholder": "Diwali seetu",
+      "groupNo": "Group No",
+      "cycleNo": "Cycle No",
+      "cycleNoPlaceholder": "10",
+      "date": "Date",
+      "time": "Time",
+      "timePlaceholder": "9 PM",
+      "total": "Total",
+      "totalPlaceholder": "10,00,000",
+      "auctionedAmount": "Auctioned Amount",
+      "auctionedAmountPlaceholder": "10,000",
+      "duePayment": "Due Payment",
+      "duePaymentPlaceholder": "5,000",
+      "discountAmount": "Discount Amount",
+      "discountAmountPlaceholder": "5,000"
+    },
+    "actions": {
+      "submit": "Generate Configuration Card"
+    }
+  },
   "chitRegistration": {
     "sections": {
       "basic": {
@@ -15,7 +40,7 @@
       "total": "Total Chit Value",
       "monthly": "Monthly Installment",
       "members": "Total Members",
-      "duration": "Duration",
+      "duration": "Duration (in months)",
       "durationUnit": "Duration Unit",
       "commission": "Commission (%)"
     },
@@ -36,6 +61,12 @@
     }
   },
   "memberRegistration": {
+    "create": {
+      "title": "Add Members",
+      "selectall": "Select All",
+      "add": "Add Member",
+      "description": "Assign members to the Chit"
+    },
     "sections": {
       "personal": {
         "title": "Personal Information",

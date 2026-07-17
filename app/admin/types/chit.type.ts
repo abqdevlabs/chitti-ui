@@ -1,3 +1,5 @@
+import { MemberList } from "./member.type";
+
 export interface AddChit {
   name: string;
   total: number;
@@ -5,6 +7,14 @@ export interface AddChit {
   members: number;
   duration: number;
   durationUnit: "month";
-  commision: number;
+  commission: number;
   membersId: string[];
+}
+
+export interface ChitList {
+  id: string;
+  name: string;
+  monthly: string;
+  total: string;
+  members: MemberList[];
 }

@@ -2,7 +2,6 @@
 import MemberRegistrationForm from "@app/admin/members/create/MemberAddForm";
 import {
   useMember,
-  useResetMember,
   useSetMemberField,
 } from "@app/admin/store/member/add-member.selector";
 import { AddMember } from "@app/admin/types/member.type";

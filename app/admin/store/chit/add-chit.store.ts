@@ -8,7 +8,7 @@ const initialState: AddChit = {
   members: 0,
   duration: 0,
   durationUnit: "month",
-  commision: 0,
+  commission: 0,
   membersId: [],
 };
 
@@ -18,7 +18,7 @@ interface AddSchemeStore {
   setField: <K extends keyof AddChit>(field: K, value: AddChit[K]) => void;
   toggleMember: (id: string) => void;
   selectAllMembers: (ids: string[]) => void;
-
+  removeMember: (id: string) => void;
   setScheme: (scheme: Partial<AddChit>) => void;
 
   reset: () => void;
@@ -55,6 +55,14 @@ export const useAddSchemeStore = create<AddSchemeStore>((set) => ({
         },
       };
     }),
+  removeMember: (id: string) =>
+    set((state) => ({
+      scheme: {
+        ...state.scheme,
+        // This will always filter out the ID, ensuring it is removed safely
+        membersId: state.scheme.membersId.filter((x: string) => x !== id),
+      },
+    })),
   selectAllMembers: (ids: string[]) =>
     set((state) => ({
       scheme: {
