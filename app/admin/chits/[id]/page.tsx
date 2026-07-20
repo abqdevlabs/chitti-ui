@@ -1,5 +1,5 @@
 "use client";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/Button";
 import { useParams } from "next/navigation";
 import { CardForm } from "./CardForm";
 import { FloatingTransliteratePad } from "@/components/floatingtranslate";

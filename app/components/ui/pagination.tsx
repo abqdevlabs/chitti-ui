@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import { cn } from "@app/lib/utils";
-import { Button } from "@/app/components/ui/button";
+import { Button } from "@app/components/ui/Button";
 import {
   ChevronLeftIcon,
   ChevronRightIcon,
@@ -74,7 +74,6 @@ function PaginationPrevious({
   return (
     <PaginationLink
       aria-label="Go to previous page"
-      size="default"
       className={cn("pl-2!", className)}
       {...props}
     >

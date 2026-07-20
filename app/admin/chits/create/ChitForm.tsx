@@ -1,7 +1,7 @@
 "use client";
 
 import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
-import { Button } from "@app/components/ui/button";
+import { Button } from "@app/components/ui/Button";
 import {
   Card,
   CardContent,

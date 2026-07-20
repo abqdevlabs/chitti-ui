@@ -1,5 +1,5 @@
 "use client";
-import { Button } from "@app/components/ui/button";
+import { Button } from "@app/components/ui/Button";
 import { Plus } from "lucide-react";
 import { useState } from "react";
 import { ChitCreateModal } from "./create/ChitForm";

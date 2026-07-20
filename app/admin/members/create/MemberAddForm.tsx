@@ -2,17 +2,11 @@
 
 import { useTranslations } from "next-intl";
 
-import {
-  Card,
-  CardAction,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@app/components/ui/card";
+import { Card } from "@app/components/ui/card";
 import { Input } from "@app/components/ui/input";
 import { Label } from "@app/components/ui/label";
 import { AddMember } from "../../types/member.type";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/Button";
 
 type props = {
   member: AddMember;

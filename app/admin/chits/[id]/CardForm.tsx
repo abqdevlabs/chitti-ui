@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/card";
 import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/Button";
 import { useTranslations } from "next-intl";
 import { toBlob, toPng } from "html-to-image";
 import { ReactTransliterate } from "react-transliterate";

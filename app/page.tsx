@@ -9,8 +9,8 @@ import {
   ShieldCheck,
   Menu,
 } from "lucide-react";
-import { Button } from "./components/ui/button";
 import { useRouter } from "next/navigation";
+import { Button } from "@app/components/ui/Button";
 
 export default function LandingPage() {
   const router = useRouter();
