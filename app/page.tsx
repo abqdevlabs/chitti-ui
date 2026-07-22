@@ -19,9 +19,7 @@ export default function LandingPage() {
       {/* ---------------- NAVBAR ---------------- */}
       <header className="sticky top-0 z-50 border-b border-outline/20 bg-background/80 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-          <h1 className="text-2xl font-bold text-primary">
-            Chit<span className="text-secondary">Flow</span>
-          </h1>
+          <h1 className="text-2xl font-bold text-primary">ChitIt</h1>
 
           <nav className="hidden gap-8 md:flex">
             <a href="#features" className="hover:text-primary">
@@ -35,6 +33,9 @@ export default function LandingPage() {
             </a>
             <a href="#contact" className="hover:text-primary">
               Contact
+            </a>
+            <a href="policy" className="hover:text-primary">
+              Policy
             </a>
           </nav>
 
@@ -231,10 +232,10 @@ export default function LandingPage() {
 
       <footer className="border-t border-outline/20 py-10">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-6 md:flex-row">
-          <h2 className="text-xl font-bold text-primary">ChitFlow</h2>
+          <h2 className="text-xl font-bold text-primary">Chitit</h2>
 
           <p className="text-sm text-on-surface-variant">
-            © 2026 ChitFlow. All Rights Reserved.
+            © 2026 Chitit. All Rights Reserved.
           </p>
         </div>
       </footer>

@@ -16,6 +16,7 @@ import {
 } from "@app/components/ui/field";
 import { Input } from "@app/components/ui/input";
 import { useState, FormEvent } from "react";
+import { useRouter } from "next/navigation";
 
 // Capitalized 'Props' to follow TypeScript naming conventions
 type LoginFormProps = {
@@ -23,6 +24,7 @@ type LoginFormProps = {
 };
 
 export function LoginForm({ onSubmit }: LoginFormProps) {
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -77,7 +79,15 @@ export function LoginForm({ onSubmit }: LoginFormProps) {
               <Field>
                 {/* Removed onClick here; type="submit" will now trigger onSubmit on the form */}
                 <Button type="submit">Login</Button>
-                <Button variant="outline" type="button">
+                <Button
+                  variant="outline"
+                  type="button"
+                  onClick={() =>
+                    router.push(
+                      "http://localhost:2002/api/auth/google/callback",
+                    )
+                  }
+                >
                   Login with Google
                 </Button>
                 <FieldDescription className="text-center">
