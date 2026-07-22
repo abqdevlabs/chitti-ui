@@ -42,7 +42,12 @@
       "members": "மொத்த உறுப்பினர்கள்",
       "duration": "கால அளவு",
       "durationUnit": "கால அலகு",
-      "commission": "கமிஷன் (%)"
+      "commission": "கமிஷன் (%)",
+      "startmonth": "தொடங்கும் மாதம்",
+      "auctionday": "ஏல நாள்",
+      "paymentday": "பணம் செலுத்தும் நாள்",
+      "allmonth": "பிரதி மாதம்",
+      "date": "ஆம் நாள்"
     },
     "placeholders": {
       "name": "பிரீமியம் கோல்டு சிட்டு",

@@ -147,6 +147,7 @@
 @theme inline {
   --color-text-primary: #191c1e;
   --color-text-secondary: #434656;
+  --color-error: var(--color-error);
   --font-sans: var(--font-sans);
   --font-heading: var(--font-heading);
   --color-sidebar-ring: var(--sidebar-ring);
@@ -187,6 +188,7 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+  --shadow-custom-sm: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
 }
 
 @layer base {

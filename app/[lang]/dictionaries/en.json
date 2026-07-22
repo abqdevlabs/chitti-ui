@@ -42,7 +42,12 @@
       "members": "Total Members",
       "duration": "Duration (in months)",
       "durationUnit": "Duration Unit",
-      "commission": "Commission (%)"
+      "commission": "Commission (%)",
+      "startMonth": "Start Month",
+      "auctionday": "Auction Day",
+      "paymentday": "Payment Day",
+      "allmonth": "Every Month",
+      "date": "Day"
     },
     "placeholders": {
       "name": "Premium Gold Chit",

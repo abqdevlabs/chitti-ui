@@ -27,6 +27,7 @@ import { useState } from "react";
 import { MemberSelector } from "./MemberListCard";
 import { AddChit } from "@/admin/types/chit.type";
 import { MemberList } from "@/admin/types/member.type";
+import { MonthSelect } from "../[id]/List";
 type props = {
   chit: AddChit;
   setField: <K extends keyof AddChit>(field: K, value: AddChit[K]) => void;
@@ -35,6 +36,53 @@ type props = {
   toggle: (id: string) => void;
   remove: (id: string) => void;
 };
+const MONTH_LIST = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+const DATE_LIST = [
+  "1",
+  "2",
+  "3",
+  "4",
+  "5",
+  "6",
+  "7",
+  "8",
+  "9",
+  "10",
+  "11",
+  "12",
+  "13",
+  "14",
+  "15",
+  "16",
+  "17",
+  "18",
+  "19",
+  "20",
+  "21",
+  "22",
+  "23",
+  "24",
+  "25",
+  "26",
+  "27",
+  "28",
+  "29",
+  "30",
+  "31",
+];
 export function ChitCreateModal({
   chit,
   setField,
@@ -142,10 +190,21 @@ export function ChitCreateModal({
                     <Input
                       id="total"
                       placeholder="10,00,000"
-                      value={chit.total}
-                      onChange={(e) =>
-                        setField("total", Number(e.target.value))
+                      type="text"
+                      value={
+                        chit.total ? chit.total.toLocaleString("en-IN") : ""
                       }
+                      onChange={(e) => {
+                        // 1. Remove commas and non-numeric characters
+                        const rawValue = e.target.value
+                          .replace(/,/g, "")
+                          .replace(/[^0-9]/g, "");
+
+                        // 2. Convert to number (default to 0 if empty)
+                        const numValue = rawValue ? Number(rawValue) : 0;
+
+                        setField("total", numValue);
+                      }}
                     />
                   </Field>
 
@@ -170,10 +229,20 @@ export function ChitCreateModal({
                     <Input
                       id="monthly"
                       placeholder="10,00,000"
-                      value={chit.monthly}
-                      onChange={(e) =>
-                        setField("monthly", Number(e.target.value))
+                      value={
+                        chit.monthly ? chit.monthly.toLocaleString("en-IN") : ""
                       }
+                      onChange={(e) => {
+                        // 1. Remove commas and non-numeric characters
+                        const rawValue = e.target.value
+                          .replace(/,/g, "")
+                          .replace(/[^0-9]/g, "");
+
+                        // 2. Convert to number (default to 0 if empty)
+                        const numValue = rawValue ? Number(rawValue) : 0;
+
+                        setField("monthly", numValue);
+                      }}
                     />
                   </Field>
 
@@ -187,6 +256,43 @@ export function ChitCreateModal({
                       value={chit.commission}
                       onChange={(e) =>
                         setField("commission", Number(e.target.value))
+                      }
+                    />
+                  </Field>
+
+                  <Field>
+                    <FieldLabel htmlFor="startMonth">
+                      {t("fields.startmonth")}
+                    </FieldLabel>
+                    <MonthSelect
+                      months={MONTH_LIST}
+                      value={chit.startMonth}
+                      onChange={(month) => setField("startMonth", month)}
+                    />
+                  </Field>
+
+                  <Field>
+                    <FieldLabel htmlFor="paymentday">
+                      {t("fields.paymentday")}
+                    </FieldLabel>
+                    <MonthSelect
+                      months={DATE_LIST}
+                      value={String(chit.paymentDay)}
+                      onChange={(month) =>
+                        setField("paymentDay", Number(month))
+                      }
+                    />
+                  </Field>
+
+                  <Field>
+                    <FieldLabel htmlFor="auctionday">
+                      {t("fields.auctionday")}
+                    </FieldLabel>
+                    <MonthSelect
+                      months={DATE_LIST}
+                      value={String(chit.auctionDay)}
+                      onChange={(month) =>
+                        setField("auctionDay", Number(month))
                       }
                     />
                   </Field>
@@ -247,19 +353,40 @@ export function ChitCreateModal({
                 <p className="text-xs text-muted-foreground">
                   {t("fields.total")}
                 </p>
-                <p className="font-semibold text-sm">{chit.total}</p>
+                <p className="font-semibold text-sm">
+                  {chit.total.toLocaleString("en-IN")}
+                </p>
               </div>
               <div>
                 <p className="text-xs text-muted-foreground">
                   {t("fields.duration")}
                 </p>
-                <p className="font-semibold text-sm">{chit.duration}</p>
+                <p className="font-semibold text-sm">{chit.duration} Months</p>
               </div>
               <div>
                 <p className="text-xs text-muted-foreground">
                   {t("fields.monthly")}
                 </p>
-                <p className="font-semibold text-sm">{chit.monthly}</p>
+                <p className="font-semibold text-sm">
+                  {chit.monthly.toLocaleString("en-IN")}
+                </p>
+              </div>
+              <div>
+                <p className="text-xs text-muted-foreground">
+                  {t("fields.paymentday")}
+                </p>
+                <p className="font-semibold text-sm">
+                  {" "}
+                  {t("fields.allmonth")} {chit.paymentDay} {t("fields.date")}
+                </p>
+              </div>
+              <div>
+                <p className="text-xs text-muted-foreground">
+                  {t("fields.auctionday")}
+                </p>
+                <p className="font-semibold text-sm">
+                  {t("fields.allmonth")} {chit.auctionDay} {t("fields.date")}
+                </p>
               </div>
               <div>
                 <p className="text-xs text-muted-foreground">

@@ -4,9 +4,16 @@ import "./globals.css";
 import { NextIntlClientProvider } from "next-intl";
 import { cn } from "@app/lib/utils";
 
-const interHeading = Inter({ subsets: ["latin"], variable: "--font-heading" });
-
-const roboto = Roboto({ subsets: ["latin"], variable: "--font-sans" });
+const interHeading = Roboto({
+  weight: ["400", "500", "700"], // 👈 Added weight array
+  subsets: ["latin"],
+  variable: "--font-sans",
+});
+const roboto = Roboto({
+  weight: ["400", "500", "700"], // 👈 Added weight array
+  subsets: ["latin"],
+  variable: "--font-sans",
+});
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

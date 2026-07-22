@@ -9,6 +9,10 @@ const initialState: AddChit = {
   duration: 0,
   durationUnit: "month",
   commission: 0,
+  startMonth: "July",
+  startYear: 2026,
+  paymentDay: 5,
+  auctionDay: 25,
   membersId: [],
 };
 

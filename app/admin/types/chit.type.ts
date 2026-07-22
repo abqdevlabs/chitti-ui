@@ -9,6 +9,10 @@ export interface AddChit {
   durationUnit: "month";
   commission: number;
   membersId: string[];
+  startMonth: string;
+  startYear: number;
+  paymentDay: number;
+  auctionDay: number;
 }
 
 export interface ChitList {
@@ -17,4 +21,43 @@ export interface ChitList {
   monthly: string;
   total: string;
   members: MemberList[];
+}
+
+export interface ChitData {
+  id: string | null;
+  name: string | null;
+  paid: number | null;
+  installments: string;
+  paid_members?: {
+    name: string;
+    upi: number;
+    cash: number;
+  }[];
+  due_members?: {
+    name: string;
+    amount: number;
+  }[];
+  auction_amt: number;
+  auction_winner: string;
+  discount_amt: number;
+  paidUPI: number;
+  paidCash: number;
+  toPay: number;
+  payments: ChitPayments[];
+}
+
+export interface ChitPayments {
+  id: string;
+  pay_id: string;
+  status: string;
+  due_amt: number;
+  upi: number;
+  cash: number;
+}
+
+export interface ChitMembers {
+  id: string;
+  name: string;
+  phone: string;
+  auctioned: boolean;
 }

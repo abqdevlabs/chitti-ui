@@ -42,10 +42,6 @@ export default function ChitsPage() {
       accessorKey: "total",
       header: "Total",
     },
-    {
-      accessorKey: "members",
-      header: "Members",
-    },
   ];
   const router = useRouter();
   const handleView = (user: ChitList) => {

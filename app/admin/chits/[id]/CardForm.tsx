@@ -11,10 +11,9 @@ import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/Button";
 import { useTranslations } from "next-intl";
-import { toBlob, toPng } from "html-to-image";
-import { ReactTransliterate } from "react-transliterate";
+import { toBlob } from "html-to-image";
+
 export function CardForm() {
-  const [text, setText] = useState("");
   const t = useTranslations();
   const previewRef = useRef<HTMLDivElement>(null);
   const exportRef = useRef<HTMLDivElement>(null);

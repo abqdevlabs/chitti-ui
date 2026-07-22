@@ -1,5 +1,5 @@
 import { api } from "@app/api";
-import { AddChit } from "../types/chit.type";
+import { AddChit, ChitData, ChitMembers } from "../types/chit.type";
 
 export async function CreateChit(data: AddChit) {
   try {
@@ -11,6 +11,22 @@ export async function CreateChit(data: AddChit) {
 export async function GetChitList() {
   try {
     const res = await api.get("/chit/list");
+    return res.data;
+  } catch {}
+}
+
+export async function GetChitData(id: string) {
+  try {
+    const res = await api.get<ChitData>("/chit", { params: { id } });
+    return res.data;
+  } catch {}
+}
+
+export async function GetChitMembers(id: string) {
+  try {
+    const res = await api.get<ChitMembers[]>("/chit/list/chit-members", {
+      params: { id },
+    });
     return res.data;
   } catch {}
 }

@@ -1,6 +1,11 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { AddChit, ChitList } from "../types/chit.type";
-import { CreateChit, GetChitList } from "../api/chit.api";
+import {
+  CreateChit,
+  GetChitData,
+  GetChitList,
+  GetChitMembers,
+} from "../api/chit.api";
 
 export function useCreateChit() {
   const queryClient = useQueryClient();
@@ -27,5 +32,24 @@ export function useGetChits() {
 
     // Optional: Keep the data fresh, or adjust stale times depending on requirements
     staleTime: 1000 * 60 * 5, // 5 minutes
+  });
+}
+
+// useGetChitData.ts
+export function useGetChitData(id?: string) {
+  return useQuery({
+    queryKey: ["chit", id],
+    queryFn: () => GetChitData(id!),
+    enabled: Boolean(id), // Automatically stays disabled if id is undefined or empty
+    staleTime: 1000 * 60 * 5,
+  });
+}
+
+export function useGetChitMembers(id?: string) {
+  return useQuery({
+    queryKey: ["chitmembers", id],
+    queryFn: () => GetChitMembers(id!),
+    enabled: Boolean(id), // Automatically stays disabled if id is undefined or empty
+    staleTime: 1000 * 60 * 5,
   });
 }
