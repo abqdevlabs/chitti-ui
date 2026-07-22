@@ -25,7 +25,7 @@ import {
 
 // Define the interface for our Reusable Table
 interface ReusableDataTableProps<TData> {
-  title: string;
+  title?: string;
   sub?: string;
   data: TData[];
   columns: ColumnDef<TData, any>[];
@@ -40,7 +40,6 @@ interface ReusableDataTableProps<TData> {
 
 export function ReusableDataTable<TData>({
   title,
-  sub,
   data,
   columns: userColumns,
   searchKey,
@@ -116,7 +115,6 @@ export function ReusableDataTable<TData>({
   return (
     <div className="w-full space-y-4">
       {/* Search Input Bar */}
-      <p>{title}</p>
 
       {searchKey && (
         <div className="flex items-center justify-between gap-4">

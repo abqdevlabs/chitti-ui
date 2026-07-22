@@ -28,6 +28,7 @@ export interface ChitData {
   name: string | null;
   paid: number | null;
   installments: string;
+  installmentId: string;
   paid_members?: {
     name: string;
     upi: number;
@@ -53,6 +54,7 @@ export interface ChitPayments {
   due_amt: number;
   upi: number;
   cash: number;
+  name: string;
 }
 
 export interface ChitMembers {
@@ -60,4 +62,12 @@ export interface ChitMembers {
   name: string;
   phone: string;
   auctioned: boolean;
+}
+
+export interface ChitInstallement {
+  id: string;
+  month: string;
+  year: number;
+  short: string;
+  isDefault: boolean;
 }

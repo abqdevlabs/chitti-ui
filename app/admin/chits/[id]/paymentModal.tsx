@@ -111,7 +111,7 @@ export function RecordPaymentModal({
                 >
                   {members.map((member) => (
                     <option key={member.id} value={member.id}>
-                      {member.name} ({member.id})
+                      {member.name} ({member.phone})
                     </option>
                   ))}
                 </select>
@@ -136,7 +136,7 @@ export function RecordPaymentModal({
                     ID
                   </span>
                   <span className="text-sm font-semibold">
-                    {selectedMember.id}
+                    {selectedMember.phone}
                   </span>
                 </div>
                 <div>

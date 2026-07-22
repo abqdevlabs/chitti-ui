@@ -145,6 +145,7 @@
 }
 
 @theme inline {
+  --color-dim: var(--color-on-tertiary-container);
   --color-text-primary: #191c1e;
   --color-text-secondary: #434656;
   --color-error: var(--color-error);

@@ -5,14 +5,27 @@ import { ChitMembers } from "@/admin/types/chit.type";
 // Sample Members Data
 
 export function AuctionModal({
+  installmentId,
+  chitId,
   members,
   isOpen = true,
   installment,
   onClose,
+  onSave,
 }: {
+  chitId: string;
+  installmentId: string;
   members: ChitMembers[];
   isOpen: boolean;
   onClose: () => void;
+  onSave: (data: {
+    memberId: string;
+    amt: number;
+    installmentId: string;
+    chitId: string;
+    date: string;
+  }) => void;
+
   installment: string;
 }) {
   // if (isLoading) {
@@ -33,11 +46,13 @@ export function AuctionModal({
   const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     const payload = {
-      member: selectedMember,
-      auctionAmount,
-      paymentDate,
+      memberId: selectedMember.id,
+      amt: auctionAmount,
+      installmentId,
+      chitId,
+      date: paymentDate,
     };
-    console.log("Recorded Payment:", payload);
+    onSave(payload);
     if (onClose) onClose();
   };
 
