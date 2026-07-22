@@ -27,7 +27,7 @@ export function LoginForm({ onSubmit }: LoginFormProps) {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const api = process.env.NEXT_PUBLIC_API_URL;
   // This prevents the page reload and allows "Enter to submit" to work
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -82,11 +82,7 @@ export function LoginForm({ onSubmit }: LoginFormProps) {
                 <Button
                   variant="outline"
                   type="button"
-                  onClick={() =>
-                    router.push(
-                      "http://localhost:2002/api/auth/google/callback",
-                    )
-                  }
+                  onClick={() => router.push(`${api}/auth/google/callback`)}
                 >
                   Login with Google
                 </Button>
