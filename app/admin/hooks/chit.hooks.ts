@@ -3,11 +3,13 @@ import { AddChit, ChitList } from "../types/chit.type";
 import {
   CreateAuctionWinner,
   CreateChit,
+  CreatePayment,
   GetChitData,
   GetChitInstallements,
   GetChitList,
   GetChitMembers,
 } from "../api/chit.api";
+import { AddPaymentPayload } from "../chits/[id]/paymentModal";
 
 export function useCreateChit() {
   const queryClient = useQueryClient();
@@ -49,6 +51,30 @@ export function useCreateAuctionWinner() {
   });
 }
 
+export function useCreatePayment() {
+  const queryClient = useQueryClient();
+  interface CreatePaymentVariables {
+    data: AddPaymentPayload;
+    chitId: string;
+    installmentId: string;
+  }
+  return useMutation({
+    // 1. Single variables object passed to mutationFn
+    mutationFn: ({ data }: CreatePaymentVariables) => CreatePayment(data),
+
+    // 2. Access variables (2nd param) in onSuccess
+    onSuccess: (_, variables) => {
+      console.log("VAR", variables);
+      queryClient.invalidateQueries({
+        queryKey: ["chitData", variables.chitId, variables.installmentId],
+      });
+    },
+
+    onError: (error) => {
+      console.error("Failed to add payment:", error);
+    },
+  });
+}
 export function useGetChits() {
   return useQuery<ChitList[], Error>({
     queryKey: ["chits"],

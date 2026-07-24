@@ -5,6 +5,7 @@ import {
   ChitInstallement,
   ChitMembers,
 } from "../types/chit.type";
+import { AddPaymentPayload } from "../chits/[id]/paymentModal";
 
 export async function CreateChit(data: AddChit) {
   try {
@@ -55,6 +56,13 @@ export async function CreateAuctionWinner(data: {
 }) {
   try {
     const res = await api.post("/chit/auction/winner", data);
+    return res.data;
+  } catch {}
+}
+
+export async function CreatePayment(data: AddPaymentPayload) {
+  try {
+    const res = await api.post("/chit/payment", data);
     return res.data;
   } catch {}
 }

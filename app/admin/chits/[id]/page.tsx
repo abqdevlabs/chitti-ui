@@ -16,6 +16,7 @@ import { RecordPaymentModal } from "./paymentModal";
 import { useEffect, useRef, useState } from "react";
 import {
   useCreateAuctionWinner,
+  useCreatePayment,
   useGetChitData,
   useGetChitInstallments,
   useGetChitMembers,
@@ -26,6 +27,7 @@ import {
   ChitMembers,
   ChitPayments,
 } from "@/admin/types/chit.type";
+import { CardFormData, ShareCardModal } from "./CardForm";
 
 export default function ChitDetail() {
   const columns = [
@@ -72,6 +74,7 @@ export default function ChitDetail() {
   const { data: chitMembers, isLoading: chitMembersLoading } =
     useGetChitMembers(chitId ?? "");
   const { mutate } = useCreateAuctionWinner();
+  const { mutate: CreatePayment } = useCreatePayment();
   console.log(installments);
   // Initialize empty
   const [selectedInstallmentId, setSelectedInstallmentId] = useState<
@@ -83,6 +86,9 @@ export default function ChitDetail() {
   );
 
   const installmentId = selectedInstallmentId ?? defaultInstallment?.id;
+  const [payment, setPayment] = useState<CardFormData>();
+
+  const [view, setView] = useState(false);
 
   // Enabled query automatically waits until installmentId is non-empty
   const { data, isLoading } = useGetChitData(chitId, installmentId ?? "");
@@ -123,18 +129,53 @@ export default function ChitDetail() {
   const dueCount =
     data?.payments?.filter((a: ChitPayments) => a.status === "due").length ?? 0;
   const totalPaymentsAmount = (data?.paidUPI ?? 0) + (data?.paidCash ?? 0);
-
+  const dueMembers = data?.due_members?.map((a) => a.id);
+  function onView(dat: ChitPayments) {
+    const da = {
+      name: data?.name ?? "",
+      groupNo: data?.installments ?? "",
+      cycleNo: data?.installments ?? "",
+      date: new Date().toISOString(),
+      time: "9 AM",
+      total: (data?.toPay ?? 0).toLocaleString("en-IN"),
+      auctioned: (data?.auction_amt ?? 0).toLocaleString("en-IN"),
+      due: (dat.due_amt ?? 0).toLocaleString("en-IN"),
+      discount: (dat.net ?? 0).toLocaleString("en-IN"),
+    };
+    setPayment(da);
+    setView(true);
+  }
+  const dueMembersSet = new Set(dueMembers);
+  console.log("INSTLMENT ID", installmentId);
+  // 2. Filter chitMembers to get only matching user objects
+  const presentMembers =
+    chitMembers?.filter(
+      (member) => dueMembersSet.has(member.id), // Replace 'id' with your property name (e.g. memberId, userId)
+    ) ?? [];
   if (isLoading || chitMembersLoading || installmentsLoading) {
     return <div>Loading...</div>;
   }
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-8 pb-24 md:pb-8">
       {/* Modals */}
+      {view && payment && (
+        <div>
+          <ShareCardModal
+            isOpen={view}
+            onClose={() => setView(false)}
+            formData={payment}
+          />
+        </div>
+      )}
       <RecordPaymentModal
         installment={data?.installments ?? ""}
-        members={chitMembers ?? []}
+        payments={data?.payments ?? []}
+        members={presentMembers ?? []}
         isOpen={open}
         onClose={() => setOpen(false)}
+        onSave={(data) => {
+          CreatePayment({ data, chitId, installmentId: installmentId ?? "" });
+        }}
       />
       <AuctionModal
         chitId={data?.id ?? ""}
@@ -364,6 +405,7 @@ export default function ChitDetail() {
           columns={columns}
           searchKey="name"
           searchPlaceholder="Filter users by name..."
+          onEdit={(data) => onView(data)}
         />
       </div>
 
