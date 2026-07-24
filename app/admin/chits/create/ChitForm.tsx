@@ -28,6 +28,7 @@ import { MemberSelector } from "./MemberListCard";
 import { AddChit } from "@/admin/types/chit.type";
 import { MemberList } from "@/admin/types/member.type";
 import { MonthSelect } from "../[id]/List";
+import { useAddSchemeStore } from "@/admin/store/chit/add-chit.store";
 type props = {
   chit: AddChit;
   setField: <K extends keyof AddChit>(field: K, value: AddChit[K]) => void;
@@ -100,8 +101,26 @@ export function ChitCreateModal({
     { id: 3, title: "Review", description: "Review and finish" },
   ];
   const [currentStep, setCurrentStep] = useState(1);
-  const [selectedIds, setSelectedIds] = useState<string[]>([]);
+  const scheme = useAddSchemeStore((state) => state.scheme);
+  const toggleMember = useAddSchemeStore((state) => state.toggleMember);
+  const selectAllMembers = useAddSchemeStore((state) => state.selectAllMembers);
 
+  const selectedIds = scheme.membersId ?? [];
+  const allMemberIds = members.map((m) => m.id);
+  const isAllSelected =
+    members.length > 0 && allMemberIds.every((id) => selectedIds.includes(id));
+
+  const handleSelectAll = () => {
+    if (isAllSelected) {
+      setField("membersId", []);
+    } else {
+      selectAllMembers(allMemberIds);
+    }
+  };
+
+  const handleSubmit = () => {
+    onSave(scheme);
+  };
   //   const handleToggle = (id: string, checked: boolean) => {
   //     if (checked) {
   //       setSelectedIds((prev) => [...prev, id]);
@@ -112,17 +131,17 @@ export function ChitCreateModal({
   //     }
   //   };
 
-  const handleToggle = (id: string, checked: boolean) => {
-    if (checked) {
-      setSelectedIds((prev) => [...prev, id]);
+  // const handleToggle = (id: string, checked: boolean) => {
+  //   if (checked) {
+  //     setSelectedIds((prev) => [...prev, id]);
 
-      toggle(id);
-    } else {
-      setSelectedIds((prev) => prev.filter((item) => item !== id));
+  //     toggle(id);
+  //   } else {
+  //     setSelectedIds((prev) => prev.filter((item) => item !== id));
 
-      remove(id);
-    }
-  };
+  //     remove(id);
+  //   }
+  // };
 
   return (
     <Card className="w-full max-w-xl h-auto mx-auto flex flex-col justify-between">
@@ -322,7 +341,7 @@ export function ChitCreateModal({
                   name={member.name}
                   phoneOrId={member.phone}
                   isSelected={selectedIds.includes(member.id)}
-                  onToggle={handleToggle}
+                  onToggle={toggleMember}
                 />
               ))}
             </div>
