@@ -129,7 +129,6 @@ export default function ChitDetail() {
   const dueCount =
     data?.payments?.filter((a: ChitPayments) => a.status === "due").length ?? 0;
   const totalPaymentsAmount = (data?.paidUPI ?? 0) + (data?.paidCash ?? 0);
-  const dueMembers = data?.due_members?.map((a) => a.id);
   function onView(dat: ChitPayments) {
     const da = {
       name: data?.name ?? "",

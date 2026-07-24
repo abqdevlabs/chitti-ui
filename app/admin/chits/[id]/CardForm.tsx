@@ -119,7 +119,7 @@ export function ShareCardModal({
       setIsExporting(false);
     }
   };
-  const formatShortDate = (dateString) => {
+  const formatShortDate = (dateString: string) => {
     if (!dateString) return "—";
 
     const date = new Date(dateString);
@@ -281,7 +281,7 @@ export function ShareCardModal({
         >
           <div
             ref={exportRef}
-            className="w-[1080px] h-[600px] bg-gradient-to-tr from-slate-950 via-slate-900 to-indigo-950 text-white p-10 border border-slate-800 flex flex-col justify-between"
+            className="w-270 h-150 bg-linear-to-tr from-slate-950 via-slate-900 to-indigo-950 text-white p-10 border border-slate-800 flex flex-col justify-between"
           >
             {/* Top Header & Salutation */}
             <div>

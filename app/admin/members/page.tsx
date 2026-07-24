@@ -11,15 +11,14 @@ import { AddMember, MemberList } from "../types/member.type";
 import { useCreateMember, useGetMembers } from "../hooks/member.hooks";
 import { ReusableDataTable } from "@/components/ui/data-table";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
 
 export default function MembersPage() {
   const member = useMember();
   const router = useRouter();
   const reset = useAddMemberStore((state) => state.reset);
   const setField = useSetMemberField();
-  const [edit, setEdit] = useState<MemberList>();
-  const [editOpen, setEditOpen] = useState(false);
+  // const [edit, setEdit] = useState<MemberList>();
+  // const [editOpen, setEditOpen] = useState(false);
   const { mutate } = useCreateMember();
   function OnSave(data: AddMember) {
     mutate(data);
@@ -44,8 +43,8 @@ export default function MembersPage() {
 
   const handleEdit = (user: MemberList) => {
     // router.push(`/users/${user.id}/edit`);
-    setEdit(user);
-    setEditOpen(true);
+    // setEdit(user);
+    // setEditOpen(true);
     console.log("Navigating to edit user:", user.id);
   };
   return (

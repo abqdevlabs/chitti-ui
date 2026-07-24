@@ -1,6 +1,4 @@
 import React from "react";
-// Assuming these are your local UI imports (e.g., Shadcn or custom components)
-import { Card } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 
 interface MemberSelectorProps {
