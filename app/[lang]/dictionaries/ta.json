@@ -14,6 +14,8 @@
       "total": "மொத்தம்",
       "totalPlaceholder": "10,00,000",
       "auctionedAmount": "ஏலத் தொகை",
+      "auctionWinner": "ஏலம் வென்றவர்",
+
       "auctionedAmountPlaceholder": "10,000",
       "duePayment": "செலுத்த வேண்டிய தொகை",
       "duePaymentPlaceholder": "5,000",

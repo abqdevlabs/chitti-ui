@@ -59,7 +59,7 @@ export function RecordPaymentModal({
     };
     onSave(payload);
 
-    // if (onClose) onClose();
+    if (onClose) onClose();
   };
 
   return (

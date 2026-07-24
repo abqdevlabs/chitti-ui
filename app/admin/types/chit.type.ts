@@ -53,7 +53,10 @@ export interface ChitPayments {
   pay_id: string;
   status: string;
   memberId: string;
+  member_name: string;
+  member_phone: string;
   due_amt: number;
+  discount_amt: number;
   upi: number;
   cash: number;
   net: number;

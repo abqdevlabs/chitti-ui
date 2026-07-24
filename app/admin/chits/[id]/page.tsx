@@ -133,25 +133,38 @@ export default function ChitDetail() {
   function onView(dat: ChitPayments) {
     const da = {
       name: data?.name ?? "",
+      member_name: dat.member_name,
       groupNo: data?.installments ?? "",
       cycleNo: data?.installments ?? "",
       date: new Date().toISOString(),
+      auction_amt:
+        data?.auction_winner === null ? "0" : formatCurrency(data?.auction_amt),
+      auction_winner:
+        data?.auction_winner === null
+          ? "No Winner"
+          : (data?.auction_winner ?? "N/A"),
       time: "9 AM",
       total: (data?.toPay ?? 0).toLocaleString("en-IN"),
+      phone: "7010497689",
       auctioned: (data?.auction_amt ?? 0).toLocaleString("en-IN"),
-      due: (dat.due_amt ?? 0).toLocaleString("en-IN"),
-      discount: (dat.net ?? 0).toLocaleString("en-IN"),
+      due: (dat.net ?? 0).toLocaleString("en-IN"),
+      discount: (dat.discount_amt ?? 0).toLocaleString("en-IN"),
     };
     setPayment(da);
     setView(true);
   }
-  const dueMembersSet = new Set(dueMembers);
+  const unPaidId = data?.payments
+    .filter((a) => a.status != "paid")
+    .map((s) => s.memberId);
+
+  const dueMembersSet = new Set(unPaidId);
   console.log("INSTLMENT ID", installmentId);
   // 2. Filter chitMembers to get only matching user objects
   const presentMembers =
     chitMembers?.filter(
       (member) => dueMembersSet.has(member.id), // Replace 'id' with your property name (e.g. memberId, userId)
     ) ?? [];
+
   if (isLoading || chitMembersLoading || installmentsLoading) {
     return <div>Loading...</div>;
   }
@@ -346,6 +359,7 @@ export default function ChitDetail() {
               <span className="text-xs font-semibold text-text-secondary uppercase tracking-wider">
                 Auction Amount
               </span>
+
               <Gavel className="w-4 h-4 text-text-secondary" />
             </div>
             <p className="text-2xl font-bold tracking-tight text-text-primary">
@@ -357,18 +371,29 @@ export default function ChitDetail() {
         </div>
 
         {/* Auction Winner Card */}
-        <div className="p-5 bg-card rounded-2xl border border-border shadow-xs flex flex-col justify-between">
+        <div className="p-5 bg-card rounded-2xl border border-border shadow-xs flex flex-col justify-between h-full">
           <div>
+            {/* Header: Label + Icon */}
             <div className="flex items-center justify-between mb-2">
               <span className="text-xs font-semibold text-text-secondary uppercase tracking-wider">
                 Auction Winner
               </span>
               <Trophy className="w-4 h-4 text-text-secondary" />
             </div>
-            <p className="text-2xl font-bold tracking-tight text-text-primary truncate">
+
+            {/* Winner Name */}
+            <p className="text-2xl font-bold tracking-tight text-text-primary truncate mb-1">
               {data?.auction_winner === null
                 ? "No Winner"
                 : (data?.auction_winner ?? "N/A")}
+            </p>
+
+            {/* Winning Amount / Payout */}
+            <p className="text-sm font-semibold text-text-secondary">
+              Amount:{" "}
+              <span className="text-text-primary font-bold">
+                {formatCurrency((data?.toPay ?? 0) - (data?.auction_amt ?? 0))}
+              </span>
             </p>
           </div>
         </div>
