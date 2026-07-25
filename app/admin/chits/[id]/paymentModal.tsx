@@ -27,7 +27,9 @@ export function RecordPaymentModal({
   installment: string;
   onSave: (data: AddPaymentPayload) => void;
 }) {
-  const [selectedMemberId, setSelectedMemberId] = useState(members[0].id);
+  const [selectedMemberId, setSelectedMemberId] = useState(
+    members[0]?.id ?? "",
+  );
   const [upiAmount, setUpiAmount] = useState("");
   const [cashAmount, setCashAmount] = useState("");
   const [paymentDate, setPaymentDate] = useState("2026-07-21");
