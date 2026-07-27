@@ -25,8 +25,8 @@ import {
 import { CheckIcon, LoaderCircleIcon } from "lucide-react";
 import { useState } from "react";
 import { MemberSelector } from "./MemberListCard";
-import { AddChit } from "@/admin/types/chit.type";
-import { MemberList } from "@/admin/types/member.type";
+import { AddChit } from "@admin/types/chit.type";
+import { MemberList } from "@admin/types/member.type";
 import { MonthSelect } from "../[id]/List";
 import { useAddSchemeStore } from "@/admin/store/chit/add-chit.store";
 type props = {

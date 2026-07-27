@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { X, User } from "lucide-react";
-import { ChitMembers } from "@admin/types/chit.type";
+import { ChitMembers, ChitPayments } from "@admin/types/chit.type";
 
 // Sample Members Data
 export interface AddPaymentPayload {
