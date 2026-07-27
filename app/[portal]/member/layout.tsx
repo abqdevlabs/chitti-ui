@@ -1,10 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import { TopBar } from "@app/admin/components/TopBar";
-import { SideNavbar } from "@app/admin/components/SideBar";
-import { useRouter } from "next/navigation";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { SideNavbar } from "@admin/components/SideBar";
 
 export default function AdminLayout({
   children,
@@ -14,7 +12,6 @@ export default function AdminLayout({
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [selectedSideBar, setSelectedSideBar] = useState("dashboard");
 
-  const router = useRouter();
   const queryClient = new QueryClient();
   return (
     <div className="relative flex min-h-screen flex-col bg-slate-100/40 font-sans">

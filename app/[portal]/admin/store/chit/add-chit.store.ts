@@ -1,4 +1,4 @@
-import { AddChit } from "@app/admin/types/chit.type";
+import { AddChit } from "@admin/types/chit.type";
 import { create } from "zustand";
 
 const initialState: AddChit = {

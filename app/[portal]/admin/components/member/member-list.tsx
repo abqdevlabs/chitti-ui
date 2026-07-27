@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { Check, Circle } from "lucide-react";
 import { cn } from "@app/lib/utils";
 

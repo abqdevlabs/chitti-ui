@@ -1,11 +1,11 @@
 "use client";
-import MemberRegistrationForm from "@app/admin/members/create/MemberAddForm";
+import MemberRegistrationForm from "@admin/members/create/MemberAddForm";
 import {
   useMember,
   useSetMemberField,
-} from "@app/admin/store/member/add-member.selector";
-import { AddMember } from "@app/admin/types/member.type";
-import { useAddMemberStore } from "@app/admin/store/member/add-member.store";
+} from "@admin/store/member/add-member.selector";
+import { AddMember } from "@admin/types/member.type";
+import { useAddMemberStore } from "@admin/store/member/add-member.store";
 
 export default function MembersPage() {
   const member = useMember();

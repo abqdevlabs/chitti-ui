@@ -248,18 +248,22 @@ function StepperTrigger({
 
   // Register this trigger for keyboard navigation
   const btnRef = useRef<HTMLButtonElement>(null);
+  const [myIdx, setMyIdx] = useState(-1);
+
   useEffect(() => {
     if (btnRef.current) {
       registerTrigger(btnRef.current);
     }
-  }, [btnRef.current]);
+  }, [registerTrigger]);
 
   // Find our index among triggers for navigation
-  const myIdx = useMemo(
-    () =>
-      triggerNodes.findIndex((n: HTMLButtonElement) => n === btnRef.current),
-    [triggerNodes, btnRef.current],
-  );
+  useEffect(() => {
+    if (btnRef.current) {
+      setMyIdx(
+        triggerNodes.findIndex((n: HTMLButtonElement) => n === btnRef.current),
+      );
+    }
+  }, [triggerNodes]);
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>) => {
     switch (e.key) {
