@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { ReactTransliterate } from "react-transliterate";
-import { Copy, Check, Languages, Minimize2, Maximize2 } from "lucide-react";
+import { Copy, Check, Languages, Minimize2 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 
 export function FloatingTransliteratePad() {

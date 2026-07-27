@@ -1,8 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
-import { TopBar } from "@app/admin/components/TopBar";
-import { SideNavbar } from "@app/admin/components/SideBar";
+import { TopBar } from "@admin/components/TopBar";
+import { SideNavbar } from "@admin/components/SideBar";
+import { useRouter } from "next/navigation";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 export default function AdminLayout({

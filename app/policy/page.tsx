@@ -7,9 +7,6 @@ import {
   Lock,
   AlertCircle,
   Search,
-  CheckCircle2,
-  Building2,
-  Mail,
   ChevronRight,
 } from "lucide-react";
 

@@ -1,5 +1,5 @@
+import { AddChit } from "@admin/types/chit.type";
 import { create } from "zustand";
-import { AddChit } from "@app/admin/types/chit.type";
 
 const initialState: AddChit = {
   name: "",

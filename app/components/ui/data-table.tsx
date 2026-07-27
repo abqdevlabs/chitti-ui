@@ -28,7 +28,7 @@ interface ReusableDataTableProps<TData> {
   title?: string;
   sub?: string;
   data: TData[];
-  columns: ColumnDef<TData, any>[];
+  columns: ColumnDef<TData, unknown>[];
   /** The field key you want the search bar to filter (e.g., "email" or "name") */
   searchKey?: keyof TData;
   searchPlaceholder?: string;
@@ -39,7 +39,6 @@ interface ReusableDataTableProps<TData> {
 }
 
 export function ReusableDataTable<TData>({
-  title,
   data,
   columns: userColumns,
   searchKey,
@@ -47,6 +46,7 @@ export function ReusableDataTable<TData>({
   onView,
   onEdit,
 }: ReusableDataTableProps<TData>) {
+  "use no memo";
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     [],
@@ -56,7 +56,7 @@ export function ReusableDataTable<TData>({
   const columns = React.useMemo(() => {
     if (!onView && !onEdit) return userColumns;
 
-    const actionColumn: ColumnDef<TData, any> = {
+    const actionColumn: ColumnDef<TData, unknown> = {
       id: "actions",
       header: () => <div className="text-right">Actions</div>,
       cell: ({ row }) => {
