@@ -19,13 +19,13 @@ import {
   useGetChitData,
   useGetChitInstallments,
   useGetChitMembers,
-} from "@/admin/hooks/chit.hooks";
+} from "@admin/hooks/chit.hooks";
 import { AuctionModal } from "./auctionModal";
 import {
   ChitInstallement,
   ChitMembers,
   ChitPayments,
-} from "@/admin/types/chit.type";
+} from "@admin/types/chit.type";
 
 export default function ChitDetail() {
   const columns = [
