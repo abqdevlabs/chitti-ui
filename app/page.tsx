@@ -11,9 +11,12 @@ import {
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { Button } from "@app/components/ui/Button";
+import { LanguageSwitcher } from "./components/language-changer";
+import { useTranslation } from "react-i18next";
 
 export default function LandingPage() {
   const router = useRouter();
+  const { t } = useTranslation();
   return (
     <div className="min-h-screen bg-background text-on-background">
       {/* ---------------- NAVBAR ---------------- */}
@@ -37,6 +40,7 @@ export default function LandingPage() {
             <a href="policy" className="hover:text-primary">
               Policy
             </a>
+            <LanguageSwitcher />
           </nav>
 
           <div className="hidden gap-3 md:flex">
@@ -56,7 +60,7 @@ export default function LandingPage() {
         </div>
       </header>
 
-      {/* ---------------- HERO ---------------- */}
+      {/* ---------------- landing.hero ---------------- */}
 
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 bg-linear-to-br from-primary/10 via-background to-secondary/10" />
@@ -66,45 +70,46 @@ export default function LandingPage() {
 
           <div>
             <span className="rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary">
-              Modern Chit Fund Platform
+              {t("landing.hero.badge")}
             </span>
 
             <h2 className="mt-6 text-5xl font-extrabold leading-tight">
-              Manage Your
-              <span className="block text-primary">Chit Fund Business</span>
-              Effortlessly
+              {t("landing.hero.title1")}
+              <span className="block text-primary">
+                {t("landing.hero.title2")}
+              </span>
+              {t("landing.hero.title3")}
             </h2>
 
             <p className="mt-6 max-w-xl text-lg text-on-surface-variant">
-              Manage subscribers, auctions, collections, branches, reports,
-              payments and notifications from one beautiful dashboard.
+              {t("landing.hero.description")}
             </p>
 
             <div className="mt-8 flex gap-4">
               <Button className="flex items-center gap-2 rounded-full bg-primary px-7 py-3 font-semibold text-white">
-                Start Free
+                {t("landing.hero.startFree")}
                 <ArrowRight size={18} />
               </Button>
 
               <Button className="rounded-full border border-outline px-7 py-3">
-                Book Demo
+                {t("landing.hero.bookDemo")}
               </Button>
             </div>
 
             <div className="mt-10 flex flex-wrap gap-5 text-sm">
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="text-secondary" size={18} />
-                Secure
+                {t("landing.hero.secure")}
               </div>
 
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="text-secondary" size={18} />
-                Cloud Based
+                {t("landing.hero.cloudBased")}
               </div>
 
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="text-secondary" size={18} />
-                Multi Branch
+                {t("landing.hero.multiBranch")}
               </div>
             </div>
           </div>
@@ -114,7 +119,9 @@ export default function LandingPage() {
           <div className="grid gap-5">
             <div className="rounded-3xl bg-surface-container-lowest p-8 shadow-xl">
               <div className="mb-6 flex items-center justify-between">
-                <h3 className="text-xl font-semibold">Dashboard</h3>
+                <h3 className="text-xl font-semibold">
+                  {t("landing.nav.dashboard")}
+                </h3>
 
                 <div className="rounded-full bg-secondary px-4 py-1 text-sm text-white">
                   Live
@@ -124,25 +131,25 @@ export default function LandingPage() {
               <div className="grid gap-4 sm:grid-cols-2">
                 <Card
                   icon={<Wallet className="text-primary" />}
-                  title="Today's Collection"
+                  title={t("dashboard.todayCollection")}
                   value="₹1,25,000"
                 />
 
                 <Card
                   icon={<Users className="text-primary" />}
-                  title="Subscribers"
+                  title={t("dashboard.subscribers")}
                   value="845"
                 />
 
                 <Card
                   icon={<Bell className="text-primary" />}
-                  title="Pending"
+                  title={t("dashboard.pending")}
                   value="18"
                 />
 
                 <Card
                   icon={<BarChart3 className="text-primary" />}
-                  title="Running Chits"
+                  title={t("dashboard.runningChits")}
                   value="32"
                 />
               </div>
@@ -155,49 +162,51 @@ export default function LandingPage() {
 
       <section id="features" className="mx-auto max-w-7xl px-6 py-24">
         <div className="text-center">
-          <h2 className="text-4xl font-bold">Everything You Need</h2>
+          <h2 className="text-4xl font-bold">
+            {t("landing.features.heading")}
+          </h2>
 
           <p className="mt-3 text-on-surface-variant">
-            Powerful tools to automate your chit fund business.
+            {t("landing.features.description")}
           </p>
         </div>
 
         <div className="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           <Feature
             icon={<Users />}
-            title="Subscriber Management"
-            description="Manage members with complete payment history."
+            title={t("landing.features.subscriberManagement.title")}
+            description={t("landing.features.subscriberManagement.description")}
           />
 
           <Feature
             icon={<Wallet />}
-            title="Collections"
-            description="Track installment collections in real time."
+            title={t("landing.features.collections.title")}
+            description={t("landing.features.collections.description")}
           />
 
           <Feature
             icon={<Bell />}
-            title="Notifications"
-            description="Automatic SMS & WhatsApp reminders."
+            title={t("landing.features.notifications.title")}
+            description={t("landing.features.notifications.description")}
           />
 
           <Feature
             icon={<ShieldCheck />}
-            title="Secure"
-            description="Role based access and encrypted data."
+            title={t("landing.features.security.title")}
+            description={t("landing.features.security.description")}
           />
 
           <Feature
             icon={<BarChart3 />}
-            title="Analytics"
-            description="Business insights with beautiful charts."
+            title={t("landing.features.analytics.title")}
+            description={t("landing.features.analytics.description")}
           />
 
-          <Feature
+          {/* <Feature
             icon={<CheckCircle2 />}
             title="Digital Auctions"
             description="Conduct auctions digitally."
-          />
+          /> */}
         </div>
       </section>
 
@@ -205,7 +214,7 @@ export default function LandingPage() {
 
       <section className="bg-surface-container py-20">
         <div className="mx-auto grid max-w-7xl gap-8 px-6 md:grid-cols-4">
-          <Stat value="12K+" label="Subscribers" />
+          <Stat value="12K+" label={t("dashboard.subscribers")} />
           <Stat value="₹120Cr+" label="Transactions" />
           <Stat value="99.9%" label="Uptime" />
           <Stat value="250+" label="Organizations" />
@@ -220,11 +229,9 @@ export default function LandingPage() {
             Ready to Modernize Your Chit Fund?
           </h2>
 
-          <p className="mt-4 text-white/80">
-            Start managing collections, auctions and members with confidence.
-          </p>
+          <p className="mt-4 text-white/80">{t("landing.cta.description")}</p>
 
-          <Button>Get Started</Button>
+          <Button>{t("landing.nav.getStarted")}</Button>
         </div>
       </section>
 
@@ -235,7 +242,7 @@ export default function LandingPage() {
           <h2 className="text-xl font-bold text-primary">Chitit</h2>
 
           <p className="text-sm text-on-surface-variant">
-            © 2026 Chitit. All Rights Reserved.
+            {t("landing.footer.copyright")}
           </p>
         </div>
       </footer>

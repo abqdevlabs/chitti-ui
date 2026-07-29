@@ -1,5 +1,5 @@
 "use client";
-import { useAddMemberStore } from "@app/admin/store/member/add-member.store";
+import { useAddMemberStore } from "@/admin/store/member/add-member.store";
 
 export const useMember = () => useAddMemberStore((state) => state.member);
 

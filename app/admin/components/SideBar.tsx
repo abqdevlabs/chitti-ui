@@ -5,11 +5,8 @@ import {
   Gavel,
   Users,
   CreditCard,
-  PiggyBank,
-  BarChart3,
   Settings,
   HelpCircle,
-  Plus,
 } from "lucide-react";
 import Link from "next/link";
 

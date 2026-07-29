@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+import { AddChit } from "@/admin/types/chit.type";
+>>>>>>> 4c963b670fe570097b80e836411bea3816fcce6f
 import { create } from "zustand";
 import { AddChit } from "@app/admin/types/chit.type";
 

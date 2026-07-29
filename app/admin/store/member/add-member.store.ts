@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { AddMember } from "@app/admin/types/member.type";
+import { AddMember } from "@/admin/types/member.type";
 
 const initialState: AddMember = {
   name: "",

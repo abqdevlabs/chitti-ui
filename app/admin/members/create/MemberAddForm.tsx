@@ -1,12 +1,11 @@
 "use client";
 
-import { useTranslations } from "next-intl";
-
 import { Card } from "@app/components/ui/card";
 import { Input } from "@app/components/ui/input";
 import { Label } from "@app/components/ui/label";
 import { AddMember } from "../../types/member.type";
 import { Button } from "@/components/ui/Button";
+import { useTranslation } from "react-i18next";
 
 type props = {
   member: AddMember;
@@ -20,7 +19,7 @@ export default function MemberRegistrationForm({
   onSave,
   onReset,
 }: props) {
-  const t = useTranslations("memberRegistration");
+  const { t } = useTranslation();
 
   return (
     <Card className="w-full max-w-xl h-auto mx-auto flex flex-col justify-between p-4">
@@ -28,7 +27,7 @@ export default function MemberRegistrationForm({
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
         <div className="space-y-2">
           <Label htmlFor="fullName">
-            {t("fields.fullName")}
+            {t("memberRegistration.fields.fullName")}
             <span className="text-destructive">*</span>
           </Label>
 
@@ -36,13 +35,13 @@ export default function MemberRegistrationForm({
             id="fullName"
             value={member.name}
             required
-            placeholder={t("placeholders.fullName")}
+            placeholder={t("memberRegistration.placeholders.fullName")}
             onChange={(e) => setField("name", e.target.value)}
           />
         </div>
         <div className="space-y-2">
           <Label htmlFor="mobile">
-            {t("fields.mobile")}
+            {t("memberRegistration.fields.mobile")}
             <span className="text-destructive">*</span>
           </Label>
 
@@ -51,24 +50,24 @@ export default function MemberRegistrationForm({
             type="tel"
             required
             value={member.phone}
-            placeholder={t("placeholders.mobile")}
+            placeholder={t("memberRegistration.placeholders.mobile")}
             onChange={(e) => setField("phone", e.target.value)}
           />
         </div>
         <div className="space-y-2">
-          <Label htmlFor="email">{t("fields.email")}</Label>
+          <Label htmlFor="email">{t("memberRegistration.fields.email")}</Label>
 
           <Input
             id="email"
             type="email"
             value={member.mail}
-            placeholder={t("placeholders.email")}
+            placeholder={t("memberRegistration.placeholders.email")}
             onChange={(e) => setField("mail", e.target.value)}
           />
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="dob">{t("fields.dob")}</Label>
+          <Label htmlFor="dob">{t("memberRegistration.fields.dob")}</Label>
 
           <Input
             id="dob"
@@ -83,18 +82,22 @@ export default function MemberRegistrationForm({
 
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
         <div className="space-y-2">
-          <Label htmlFor="aadhaar">{t("fields.aadhaar")}</Label>
+          <Label htmlFor="aadhaar">
+            {t("memberRegistration.fields.aadhaar")}
+          </Label>
 
           <Input
             id="aadhaar"
             value={member.aadhar}
-            placeholder={t("placeholders.aadhaar")}
+            placeholder={t("memberRegistration.placeholders.aadhaar")}
             onChange={(e) => setField("aadhar", e.target.value)}
           />
         </div>
 
         <div className="space-y-2 md:col-span-2">
-          <Label htmlFor="document">{t("fields.document")}</Label>
+          <Label htmlFor="document">
+            {t("memberRegistration.fields.document")}
+          </Label>
 
           <Input
             id="document"
@@ -117,22 +120,26 @@ export default function MemberRegistrationForm({
 
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
         <div className="space-y-2">
-          <Label htmlFor="nomineeName">{t("fields.nomineeName")}</Label>
+          <Label htmlFor="nomineeName">
+            {t("memberRegistration.fields.nomineeName")}
+          </Label>
           <Input
             id="nomineeName"
             value={member.nomineeName ?? ""}
-            placeholder={t("placeholders.nomineeName")}
+            placeholder={t("memberRegistration.placeholders.nomineeName")}
             onChange={(e) => setField("nomineeName", e.target.value)}
           />
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="relation">{t("fields.relation")}</Label>
+          <Label htmlFor="relation">
+            {t("memberRegistration.fields.relation")}
+          </Label>
 
           <Input
             id="relation"
             value={member.nomineeRelation ?? ""}
-            placeholder={t("placeholders.relation")}
+            placeholder={t("memberRegistration.placeholders.relation")}
             onChange={(e) => setField("nomineeRelation", e.target.value)}
           />
         </div>

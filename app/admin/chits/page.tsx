@@ -14,10 +14,12 @@ import { useGetMembers } from "../hooks/member.hooks";
 import { ReusableDataTable } from "@/components/ui/data-table";
 import { ChitList } from "../types/chit.type";
 import { useRouter } from "next/navigation";
+import { AddMembersModal } from "./create/AddMembers";
 
 export default function ChitsPage() {
   const [open, setOpen] = useState(false);
   const chit = useScheme();
+  const [openMember, setMemberOpen] = useState(false);
 
   const setField = useSetSchemeField();
   const toggle = useToggleMember();
@@ -53,11 +55,21 @@ export default function ChitsPage() {
     router.push(`/users/${user.id}/edit`);
     console.log("Navigating to edit user:", user.id);
   };
+  console.log("OPEN", openMember);
   return (
     <div>
       <Button onClick={() => setOpen(true)}>
         <Plus data-icon="inline-start" /> Create Chit
       </Button>
+      {openMember && (
+        <AddMembersModal
+          open={openMember}
+          onOpenChange={setMemberOpen}
+          onSubmit={(members) => {
+            console.log(members);
+          }}
+        />
+      )}
       {open && (
         <ChitCreateModal
           chit={chit}
@@ -69,6 +81,7 @@ export default function ChitsPage() {
           members={members ?? []}
           toggle={toggle}
           remove={remove}
+          setMemberOpen={(open) => setMemberOpen(open)}
         />
       )}
       <div className="container mx-auto py-10">

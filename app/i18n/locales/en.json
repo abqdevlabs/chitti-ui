@@ -1,4 +1,78 @@
 {
+  "landing": {
+    "appName": "ChitIt",
+    "nav": {
+      "features": "Features",
+      "dashboard": "Dashboard",
+      "pricing": "Pricing",
+      "contact": "Contact",
+      "policy": "Policy",
+      "login": "Login",
+      "getStarted": "Get Started"
+    },
+    "hero": {
+      "badge": "Modern Chit Fund Platform",
+      "title1": "Manage Your",
+      "title2": "Chit Fund Business",
+      "title3": "Effortlessly",
+      "description": "Manage subscribers, auctions, collections, branches, reports, payments and notifications from one beautiful dashboard.",
+      "startFree": "Start Free",
+      "bookDemo": "Book Demo",
+      "secure": "Secure",
+      "cloudBased": "Cloud Based",
+      "multiBranch": "Multi Branch"
+    },
+    "dashboard": {
+      "title": "Dashboard",
+      "live": "Live",
+      "todayCollection": "Today's Collection",
+      "subscribers": "Subscribers",
+      "pending": "Pending",
+      "runningChits": "Running Chits"
+    },
+    "features": {
+      "heading": "Everything You Need",
+      "description": "Powerful tools to automate your chit fund business.",
+      "subscriberManagement": {
+        "title": "Subscriber Management",
+        "description": "Manage members with complete payment history."
+      },
+      "collections": {
+        "title": "Collections",
+        "description": "Track installment collections in real time."
+      },
+      "notifications": {
+        "title": "Notifications",
+        "description": "Automatic SMS & WhatsApp reminders."
+      },
+      "security": {
+        "title": "Secure",
+        "description": "Role based access and encrypted data."
+      },
+      "analytics": {
+        "title": "Analytics",
+        "description": "Business insights with beautiful charts."
+      },
+      "digitalAuctions": {
+        "title": "Digital Auctions",
+        "description": "Conduct auctions digitally."
+      }
+    },
+    "stats": {
+      "subscribers": "Subscribers",
+      "transactions": "Transactions",
+      "uptime": "Uptime",
+      "organizations": "Organizations"
+    },
+    "cta": {
+      "title": "Ready to Modernize Your Chit Fund?",
+      "description": "Start managing collections, auctions and members with confidence.",
+      "button": "Get Started"
+    },
+    "footer": {
+      "copyright": "© 2026 ChitIt. All Rights Reserved."
+    }
+  },
   "cardForm": {
     "title": "Generate Card",
     "description": "Enter the primary details to set up the configuration.",
@@ -46,6 +120,7 @@
       "durationUnit": "Duration Unit",
       "commission": "Commission (%)",
       "startMonth": "Start Month",
+      "startYear": "Start Year",
       "auctionday": "Auction Day",
       "paymentday": "Payment Day",
 

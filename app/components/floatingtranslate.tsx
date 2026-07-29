@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { ReactTransliterate } from "react-transliterate";
-import { Copy, Check, Languages, Minimize2, Maximize2 } from "lucide-react";
+import { Copy, Check, Languages, Minimize2 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 
 export function FloatingTransliteratePad() {
@@ -58,7 +58,7 @@ export function FloatingTransliteratePad() {
                 onChangeText={(txt) => setText(txt)}
                 lang="ta"
                 placeholder="Type 'vanakkam' to get வணக்கம்..."
-                className="w-full min-h-[90px] p-3 text-sm bg-transparent outline-none border-none resize-none focus:ring-0 text-foreground"
+                className="w-full min-h-22.5 p-3 text-sm bg-transparent outline-none border-none resize-none focus:ring-0 text-foreground"
                 renderComponent={(props) => <textarea {...props} />}
               />
             </div>
@@ -73,7 +73,7 @@ export function FloatingTransliteratePad() {
                 onClick={handleCopy}
                 disabled={!text}
                 variant={isCopied ? "default" : "secondary"}
-                className={`text-xs flex items-center gap-1.5 min-w-[85px] transition-all ${
+                className={`text-xs flex items-center gap-1.5 min-w-21.25 transition-all ${
                   isCopied
                     ? "bg-emerald-600 text-white hover:bg-emerald-700"
                     : ""

@@ -1,6 +1,6 @@
 "use client";
 
-import { useAddSchemeStore } from "@app/admin/store/chit/add-chit.store";
+import { useAddSchemeStore } from "./add-chit.store";
 
 export const useScheme = () => useAddSchemeStore((state) => state.scheme);
 
