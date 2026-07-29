@@ -201,7 +201,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ---------------- STATS ---------------- */}
+      {/* ---------------- STATS -- -------------- */}
 
       <section className="bg-surface-container py-20">
         <div className="mx-auto grid max-w-7xl gap-8 px-6 md:grid-cols-4">
