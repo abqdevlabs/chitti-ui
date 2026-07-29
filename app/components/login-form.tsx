@@ -25,8 +25,8 @@ type LoginFormProps = {
 
 export function LoginForm({ onSubmit }: LoginFormProps) {
   const router = useRouter();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("gopi@rvsarees.com");
+  const [password, setPassword] = useState("Gopi@123");
   const api = process.env.NEXT_PUBLIC_API_URL;
   // This prevents the page reload and allows "Enter to submit" to work
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
