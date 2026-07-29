@@ -3,6 +3,8 @@ import { Geist, Geist_Mono, Inter, Roboto } from "next/font/google";
 import "./globals.css";
 import { NextIntlClientProvider } from "next-intl";
 import { cn } from "@app/lib/utils";
+import { LanguageProvider } from "./i18n/LanguageContext";
+import { AuthProvider } from "./context/authContext";
 
 const interHeading = Roboto({
   weight: ["400", "500", "700"], // 👈 Added weight array
@@ -87,7 +89,9 @@ export default function RootLayout({
       )}
     >
       <body className="min-h-full flex flex-col">
-        <NextIntlClientProvider>{children}</NextIntlClientProvider>
+        <AuthProvider>
+          <LanguageProvider>{children}</LanguageProvider>
+        </AuthProvider>
       </body>
     </html>
   );

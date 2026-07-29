@@ -1,0 +1,188 @@
+{
+  "landing": {
+    "appName": "ChitIt",
+    "nav": {
+      "features": "Features",
+      "dashboard": "Dashboard",
+      "pricing": "Pricing",
+      "contact": "Contact",
+      "policy": "Policy",
+      "login": "Login",
+      "getStarted": "Get Started"
+    },
+    "hero": {
+      "badge": "Modern Chit Fund Platform",
+      "title1": "Manage Your",
+      "title2": "Chit Fund Business",
+      "title3": "Effortlessly",
+      "description": "Manage subscribers, auctions, collections, branches, reports, payments and notifications from one beautiful dashboard.",
+      "startFree": "Start Free",
+      "bookDemo": "Book Demo",
+      "secure": "Secure",
+      "cloudBased": "Cloud Based",
+      "multiBranch": "Multi Branch"
+    },
+    "dashboard": {
+      "title": "Dashboard",
+      "live": "Live",
+      "todayCollection": "Today's Collection",
+      "subscribers": "Subscribers",
+      "pending": "Pending",
+      "runningChits": "Running Chits"
+    },
+    "features": {
+      "heading": "Everything You Need",
+      "description": "Powerful tools to automate your chit fund business.",
+      "subscriberManagement": {
+        "title": "Subscriber Management",
+        "description": "Manage members with complete payment history."
+      },
+      "collections": {
+        "title": "Collections",
+        "description": "Track installment collections in real time."
+      },
+      "notifications": {
+        "title": "Notifications",
+        "description": "Automatic SMS & WhatsApp reminders."
+      },
+      "security": {
+        "title": "Secure",
+        "description": "Role based access and encrypted data."
+      },
+      "analytics": {
+        "title": "Analytics",
+        "description": "Business insights with beautiful charts."
+      },
+      "digitalAuctions": {
+        "title": "Digital Auctions",
+        "description": "Conduct auctions digitally."
+      }
+    },
+    "stats": {
+      "subscribers": "Subscribers",
+      "transactions": "Transactions",
+      "uptime": "Uptime",
+      "organizations": "Organizations"
+    },
+    "cta": {
+      "title": "Ready to Modernize Your Chit Fund?",
+      "description": "Start managing collections, auctions and members with confidence.",
+      "button": "Get Started"
+    },
+    "footer": {
+      "copyright": "© 2026 ChitIt. All Rights Reserved."
+    }
+  },
+  "cardForm": {
+    "title": "Generate Card",
+    "description": "Enter the primary details to set up the configuration.",
+    "fields": {
+      "fullName": "Full Name",
+      "fullNamePlaceholder": "Diwali seetu",
+      "groupNo": "Group No",
+      "cycleNo": "Cycle No",
+      "cycleNoPlaceholder": "10",
+      "date": "Date",
+      "time": "Time",
+      "timePlaceholder": "9 PM",
+      "total": "Total",
+      "totalPlaceholder": "10,00,000",
+      "auctionedAmount": "Auctioned Amount",
+      "auctionWinner": "Auction Winner",
+
+      "auctionedAmountPlaceholder": "10,000",
+      "duePayment": "Due Payment",
+      "duePaymentPlaceholder": "5,000",
+      "discountAmount": "Discount Amount",
+      "discountAmountPlaceholder": "5,000"
+    },
+    "actions": {
+      "submit": "Generate Configuration Card"
+    }
+  },
+  "chitRegistration": {
+    "sections": {
+      "basic": {
+        "title": "Scheme Information",
+        "description": "Configure the basic details of the chit scheme."
+      },
+      "finance": {
+        "title": "Financial Details",
+        "description": "Define the payment structure and commission."
+      }
+    },
+    "fields": {
+      "name": "Scheme Name",
+      "total": "Total Chit Value",
+      "monthly": "Monthly Installment",
+      "members": "Total Members",
+      "duration": "Duration (in months)",
+      "durationUnit": "Duration Unit",
+      "commission": "Commission (%)",
+      "startMonth": "Start Month",
+      "startYear": "Start Year",
+      "auctionday": "Auction Day",
+      "paymentday": "Payment Day",
+
+      "allmonth": "Every Month",
+      "date": "Day"
+    },
+    "placeholders": {
+      "name": "Premium Gold Chit",
+      "total": "500000",
+      "monthly": "10000",
+      "members": "50",
+      "duration": "50",
+      "commission": "5"
+    },
+    "units": {
+      "month": "Month"
+    },
+    "buttons": {
+      "save": "Save Scheme",
+      "cancel": "Cancel"
+    }
+  },
+  "memberRegistration": {
+    "create": {
+      "title": "Add Members",
+      "selectall": "Select All",
+      "add": "Add Member",
+      "description": "Assign members to the Chit"
+    },
+    "sections": {
+      "personal": {
+        "title": "Personal Information",
+        "description": "Basic details of the member."
+      },
+      "kyc": {
+        "title": "KYC Information",
+        "description": "Identity verification documents."
+      },
+      "nominee": {
+        "title": "Nominee Details",
+        "description": "Person who will receive benefits if required."
+      }
+    },
+    "fields": {
+      "fullName": "Full Name",
+      "email": "Email Address",
+      "mobile": "Mobile Number",
+      "dob": "Date of Birth",
+      "aadhaar": "Aadhaar Number",
+      "pan": "PAN Number",
+      "document": "Aadhaar / PAN Document",
+      "nomineeName": "Nominee Name",
+      "relation": "Relationship"
+    },
+    "placeholders": {
+      "fullName": "John Doe",
+      "email": "john@example.com",
+      "mobile": "+91 9876543210",
+      "aadhaar": "1234 5678 9012",
+      "pan": "ABCDE1234F",
+      "nomineeName": "Jane Doe",
+      "relation": "Spouse"
+    }
+  }
+}

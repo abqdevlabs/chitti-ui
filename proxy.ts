@@ -1,127 +1,67 @@
-import { NextResponse } from "next/server";
-import { jwtVerify, importSPKI } from "jose";
+import { NextRequest, NextResponse } from "next/server";
+import { importSPKI, jwtVerify } from "jose";
+import { ROLE_ROUTES } from "@/routes";
 
-const publicKeyPromise = importSPKI(
-  process.env.NEXT_PUBLIC_JWT_PUBLIC_KEY!,
-  "RS256",
-);
+const PUBLIC_ROUTES = ["/", "/login", "/register"];
 
-// Route groups
-const FREE_ROUTES = [/^\/$/, /^\/about/, /^\/policy/];
-const PUBLIC_ONLY_ROUTES = [/^\/login/, /^\/register/];
-const ADMIN_ROUTES = [/^\/member/];
-const MEMBER_ROUTES = [/^\/admin/];
-
-export async function proxy(req) {
+export async function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
-  // 🧠 0. ONLY run on real page navigation (CRITICAL FIX)
-  const accept = req.headers.get("accept") || "";
-  if (!accept.includes("text/html")) {
-    return NextResponse.next();
-  }
-
-  // 🧠 1. Skip Next internals explicitly
-  if (
-    pathname.startsWith("/_next") ||
-    pathname.startsWith("/api") ||
-    pathname === "/favicon.ico"
-  ) {
-    return NextResponse.next();
-  }
-
-  // 🟢 2. FREE ROUTES
-  if (FREE_ROUTES.some((r) => r.test(pathname))) {
-    return NextResponse.next();
-  }
+  const isPublic = PUBLIC_ROUTES.some(
+    (route) => pathname === route || pathname.startsWith(route + "/"),
+  );
 
   const token = req.cookies.get("accessToken")?.value;
 
-  let isAuthenticated = false;
-  let role: string | null = null;
-
-  // 🔐 3. VERIFY TOKEN
-  if (token) {
-    try {
-      const publicKey = await publicKeyPromise;
-      const { payload } = await jwtVerify(token, publicKey);
-      console.log("PAYLAOD", payload);
-      isAuthenticated = true;
-      role = payload.role as string;
-    } catch (err) {
-      // 💀 kill broken token (prevents loops)
-      const res = NextResponse.redirect(new URL("/login", req.url));
-      res.cookies.delete("accessToken");
-      console.log("ERROR ON JWT VERIFY", err);
-      return res;
-    }
-  }
-
-  // 🚪 4. PUBLIC ONLY (login/register)
-  if (PUBLIC_ONLY_ROUTES.some((r) => r.test(pathname))) {
-    if (isAuthenticated && role) {
-      const redirectPath =
-        role === "member" ? "/member/dashboard" : "/admin/dashboard";
-
-      // 🛑 prevent redirect loop
-      if (pathname === redirectPath) {
-        return NextResponse.next();
-      }
-
-      return NextResponse.redirect(new URL(redirectPath, req.url));
-    }
-
-    return NextResponse.next();
-  }
-
-  // 🧑‍🏫 5. INSTRUCTOR ROUTES
-  if (ADMIN_ROUTES.some((r) => r.test(pathname))) {
-    if (!isAuthenticated || !role) {
-      if (pathname !== "/login") {
-        return NextResponse.redirect(new URL("/login", req.url));
-      }
+  // Not logged in
+  if (!token) {
+    if (isPublic) {
       return NextResponse.next();
     }
 
-    if (role !== "INSTRUCTOR") {
-      const redirectPath = "/member/dashboard";
+    return NextResponse.redirect(new URL("/login", req.url));
+  }
 
-      if (pathname === redirectPath) {
-        return NextResponse.next();
-      }
+  try {
+    const publicKey = await importSPKI(
+      process.env.NEXT_PUBLIC_JWT_PUBLIC_KEY!.replace(/\\n/g, "\n"),
+      "RS256",
+    );
+    const { payload } = await jwtVerify<{
+      role: "admin" | "member";
+    }>(token, publicKey);
 
-      return NextResponse.redirect(new URL(redirectPath, req.url));
+    const role = payload.role;
+
+    // Logged in users shouldn't visit login/register
+    if (isPublic) {
+      return NextResponse.redirect(new URL(ROLE_ROUTES[role], req.url));
+    }
+
+    if (pathname.startsWith("/admin") && role !== "admin") {
+      return NextResponse.redirect(new URL(ROLE_ROUTES.member, req.url));
+    }
+
+    if (pathname.startsWith("/member") && role !== "member") {
+      return NextResponse.redirect(new URL(ROLE_ROUTES.admin, req.url));
     }
 
     return NextResponse.next();
+  } catch (error) {
+    console.log(error);
+    const response = NextResponse.redirect(new URL("/login", req.url));
+    response.cookies.delete("accessToken");
+    return response;
   }
-
-  // 🎓 6. member ROUTES
-  if (MEMBER_ROUTES.some((r) => r.test(pathname))) {
-    if (!isAuthenticated || !role) {
-      if (pathname !== "/login") {
-        return NextResponse.redirect(new URL("/login", req.url));
-      }
-      return NextResponse.next();
-    }
-
-    if (role !== "member") {
-      const redirectPath = "/admin/dashboard";
-
-      if (pathname === redirectPath) {
-        return NextResponse.next();
-      }
-
-      return NextResponse.redirect(new URL(redirectPath, req.url));
-    }
-
-    return NextResponse.next();
-  }
-
-  return NextResponse.next();
 }
 
-// ✅ matcher (still needed)
 export const config = {
-  matcher: ["/((?!_next/static|_next/image|favicon.ico|api).*)"],
+  matcher: [
+    "/",
+    "/login/:path*",
+    "/register/:path*",
+    "/redirect",
+    "/admin/:path*",
+    "/member/:path*",
+  ],
 };

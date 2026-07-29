@@ -20,7 +20,7 @@
     ],
 
     "paths": {
-      "@admin/*": ["./app/[portal]/admin/*"],
+      "@admin/*": ["./app/admin/*"],
       "@*": ["./app*"],
       "@app*": ["./app*"],
       "components": ["./app/components"],
