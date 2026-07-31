@@ -38,7 +38,7 @@ export function useChangeChitOrder() {
 
     // Optional: Refresh your lists automatically after a successful creation
     onSuccess: async () => {
-      // Assuming you have a query list like ['chits']
+      // Assuming you have a query list slike ['chits']
       await queryClient.invalidateQueries({ queryKey: ["chits"] });
     },
 
