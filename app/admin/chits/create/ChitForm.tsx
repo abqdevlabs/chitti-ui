@@ -23,7 +23,7 @@ import {
   StepperTrigger,
 } from "@app/components/ui/stepper";
 import { CheckIcon, LoaderCircleIcon } from "lucide-react";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { MemberSelector } from "./MemberListCard";
 import { AddChit } from "@/admin/types/chit.type";
 import { MemberList } from "@/admin/types/member.type";
@@ -109,7 +109,20 @@ export function ChitCreateModal({
   const allMemberIds = members.map((m) => m.id);
   const isAllSelected =
     members.length > 0 && allMemberIds.every((id) => selectedIds.includes(id));
+  const [searchQuery, setSearchQuery] = useState("");
 
+  // 2. Filter members based on name or phone
+  const filteredMembers = useMemo(() => {
+    const query = searchQuery.trim().toLowerCase();
+
+    if (!query) return members;
+
+    return members.filter((member) => {
+      const nameMatch = member.name?.toLowerCase().includes(query);
+      const phoneMatch = member.phone?.toLowerCase().includes(query);
+      return nameMatch || phoneMatch;
+    });
+  }, [members, searchQuery]);
   const handleSelectAll = () => {
     if (isAllSelected) {
       setField("membersId", []);
@@ -121,27 +134,6 @@ export function ChitCreateModal({
   const handleSubmit = () => {
     onSave(scheme);
   };
-  //   const handleToggle = (id: string, checked: boolean) => {
-  //     if (checked) {
-  //       setSelectedIds((prev) => [...prev, id]);
-  //       setField("membersId", selectedIds);
-  //     } else {
-  //       setSelectedIds((prev) => prev.filter((item) => item !== id));
-  //       setField("membersId", selectedIds);
-  //     }
-  //   };
-
-  // const handleToggle = (id: string, checked: boolean) => {
-  //   if (checked) {
-  //     setSelectedIds((prev) => [...prev, id]);
-
-  //     toggle(id);
-  //   } else {
-  //     setSelectedIds((prev) => prev.filter((item) => item !== id));
-
-  //     remove(id);
-  //   }
-  // };
 
   return (
     <Card className="w-full max-w-xl h-auto mx-auto flex flex-col justify-between">
@@ -280,6 +272,19 @@ export function ChitCreateModal({
                   </Field>
 
                   <Field>
+                    <FieldLabel htmlFor="startYear">
+                      {t("fields.startYear")}
+                    </FieldLabel>
+                    <Input
+                      id="startYear"
+                      placeholder="2026"
+                      value={chit.startYear}
+                      onChange={(e) =>
+                        setField("startYear", Number(e.target.value))
+                      }
+                    />
+                  </Field>
+                  <Field>
                     <FieldLabel htmlFor="startMonth">
                       {t("fields.startmonth")}
                     </FieldLabel>
@@ -330,20 +335,29 @@ export function ChitCreateModal({
             <CardDescription>{t2("create.description")}</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
-            <Input type="search" placeholder="Search members..." />
-
-            {/* Added max height and scroll behavior to keep the card size stable */}
-            <div className="flex flex-col gap-2 max-h-70 overflow-y-auto overflow-x-hidden   pr-1">
-              {members.map((member: MemberList) => (
-                <MemberSelector
-                  key={member.id}
-                  id={member.id}
-                  name={member.name}
-                  phoneOrId={member.phone}
-                  isSelected={selectedIds.includes(member.id)}
-                  onToggle={toggleMember}
-                />
-              ))}
+            <Input
+              type="search"
+              placeholder="Search members..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+            <div className="flex flex-col gap-2 max-h-70 h-70 overflow-y-auto overflow-x-hidden pr-1">
+              {filteredMembers.length > 0 ? (
+                filteredMembers.map((member: MemberList) => (
+                  <MemberSelector
+                    key={member.id}
+                    id={member.id}
+                    name={member.name}
+                    phoneOrId={member.phone}
+                    isSelected={selectedIds.includes(member.id)}
+                    onToggle={toggleMember}
+                  />
+                ))
+              ) : (
+                <p className="text-sm text-muted-foreground text-center py-4">
+                  No members found matching "{searchQuery}"
+                </p>
+              )}
             </div>
           </CardContent>
         </div>
@@ -470,11 +484,7 @@ export function ChitCreateModal({
               <MoveLeftIcon className="mr-2 size-4" />
               Previous
             </Button>
-            <Button
-              type="submit"
-              className="flex-1"
-              onClick={() => onSave(chit)}
-            >
+            <Button type="submit" className="flex-1" onClick={handleSubmit}>
               Create Chit
               <CheckIcon className="ml-2 size-4" />
             </Button>

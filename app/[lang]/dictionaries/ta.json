@@ -46,6 +46,8 @@
       "durationUnit": "கால அலகு",
       "commission": "கமிஷன் (%)",
       "startmonth": "தொடங்கும் மாதம்",
+      "startYear": "தொடங்கும் வருடம்",
+
       "auctionday": "ஏல நாள்",
       "paymentday": "பணம் செலுத்தும் நாள்",
       "allmonth": "பிரதி மாதம்",

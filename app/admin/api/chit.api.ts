@@ -8,10 +8,8 @@ import {
 import { AddPaymentPayload } from "../chits/[id]/paymentModal";
 
 export async function CreateChit(data: AddChit) {
-  try {
-    const res = await api.post("/chit", data);
-    return res.data;
-  } catch {}
+  const res = await api.post("/chit", data);
+  return res.data;
 }
 export async function ChangeChitOrder(id: string, order: number) {
   try {

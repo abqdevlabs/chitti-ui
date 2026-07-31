@@ -19,9 +19,9 @@ export function useCreateChit() {
     mutationFn: (data: AddChit) => CreateChit(data),
 
     // Optional: Refresh your lists automatically after a successful creation
-    onSuccess: () => {
+    onSuccess: async () => {
       // Assuming you have a query list like ['chits']
-      queryClient.invalidateQueries({ queryKey: ["chits"] });
+      await queryClient.invalidateQueries({ queryKey: ["chits"] });
     },
 
     onError: (error) => {
@@ -37,9 +37,9 @@ export function useChangeChitOrder() {
       ChangeChitOrder(id, order),
 
     // Optional: Refresh your lists automatically after a successful creation
-    onSuccess: () => {
+    onSuccess: async () => {
       // Assuming you have a query list like ['chits']
-      queryClient.invalidateQueries({ queryKey: ["chits"] });
+      await queryClient.invalidateQueries({ queryKey: ["chits"] });
     },
 
     onError: (error) => {
@@ -100,7 +100,6 @@ export function useGetChits() {
     queryFn: GetChitList,
 
     // Optional: Keep the data fresh, or adjust stale times depending on requirements
-    staleTime: 1000 * 60 * 5, // 5 minutes
   });
 }
 

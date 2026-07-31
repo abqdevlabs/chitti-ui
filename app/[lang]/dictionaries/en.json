@@ -46,6 +46,8 @@
       "durationUnit": "Duration Unit",
       "commission": "Commission (%)",
       "startMonth": "Start Month",
+      "startYear": "Start Year",
+
       "auctionday": "Auction Day",
       "paymentday": "Payment Day",
 
