@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { AddChit, ChitList } from "../types/chit.type";
 import {
+  ChangeChitOrder,
   CreateAuctionWinner,
   CreateChit,
   CreatePayment,
@@ -16,6 +17,24 @@ export function useCreateChit() {
 
   return useMutation({
     mutationFn: (data: AddChit) => CreateChit(data),
+
+    // Optional: Refresh your lists automatically after a successful creation
+    onSuccess: () => {
+      // Assuming you have a query list like ['chits']
+      queryClient.invalidateQueries({ queryKey: ["chits"] });
+    },
+
+    onError: (error) => {
+      console.error("Failed to create chit:", error);
+    },
+  });
+}
+export function useChangeChitOrder() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: ({ id, order }: { id: string; order: number }) =>
+      ChangeChitOrder(id, order),
 
     // Optional: Refresh your lists automatically after a successful creation
     onSuccess: () => {

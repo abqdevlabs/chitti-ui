@@ -13,6 +13,20 @@ export async function CreateChit(data: AddChit) {
     return res.data;
   } catch {}
 }
+export async function ChangeChitOrder(id: string, order: number) {
+  try {
+    // Axios signature: api.put(url, data, config)
+    const res = await api.put(
+      "/chit/order",
+      { order }, // 1. Sent as JSON body: { "order": <number> }
+      { params: { id } }, // 2. Sent as query param: /chit/order?id=<id>
+    );
+    return res.data;
+  } catch (error) {
+    console.error(`Failed to update chit order for ID ${id}:`, error);
+    throw error;
+  }
+}
 
 export async function GetChitList() {
   try {
