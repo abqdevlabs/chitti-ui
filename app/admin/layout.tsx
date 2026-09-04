@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 import { TopBar } from "@app/admin/components/TopBar";
 import { SideNavbar } from "@app/admin/components/SideBar";
-import { useRouter } from "next/navigation";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 export default function AdminLayout({
@@ -14,11 +13,11 @@ export default function AdminLayout({
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [selectedSideBar, setSelectedSideBar] = useState("dashboard");
 
-  const router = useRouter();
   const queryClient = new QueryClient();
   return (
     <div className="relative flex min-h-screen flex-col bg-slate-100/40 font-sans">
       {/* Top Header - Sticky across admin pages */}
+      <TopBar onMenuClick={() => setIsSidebarOpen((isOpen) => !isOpen)} />
 
       <div className="flex flex-1">
         {/* Mobile Sidebar Backdrop Overlay */}
@@ -42,7 +41,7 @@ export default function AdminLayout({
             currentPath={selectedSideBar}
             onSelect={(c) => {
               setSelectedSideBar(c);
-              console.log(c);
+              setIsSidebarOpen(false);
             }}
           />
         </div>

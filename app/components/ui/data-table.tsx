@@ -139,8 +139,8 @@ export function ReusableDataTable<TData>({
       )}
 
       {/* Main Table */}
-      <div className="rounded-md border bg-background">
-        <Table>
+      <div className="w-full overflow-x-auto rounded-md border bg-background">
+        <Table className="min-w-[520px]">
           <TableHeader className="">
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>

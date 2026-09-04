@@ -203,7 +203,7 @@ export function ChitCreateModal({
                   />
                 </Field>
 
-                <FieldGroup className="grid grid-cols-2 gap-4 max-w-md">
+                <FieldGroup className="grid grid-cols-1 gap-4 max-w-md sm:grid-cols-2">
                   <Field>
                     <FieldLabel htmlFor="total">{t("fields.total")}</FieldLabel>
                     <Input
@@ -360,7 +360,7 @@ export function ChitCreateModal({
           </CardHeader>
           <CardContent className="space-y-6">
             {/* Read-only Summary Cards */}
-            <div className="grid grid-cols-2 gap-4 bg-muted/40 p-4 rounded-lg border border-border">
+            <div className="grid grid-cols-1 gap-4 bg-muted/40 p-4 rounded-lg border border-border sm:grid-cols-2">
               <div>
                 <p className="text-xs text-muted-foreground">
                   {" "}
