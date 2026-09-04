@@ -1,10 +1,6 @@
 import React, { useState } from "react";
 import { X, User } from "lucide-react";
-<<<<<<< HEAD:app/[portal]/admin/chits/[id]/paymentModal.tsx
-import { ChitMembers, ChitPayments } from "@admin/types/chit.type";
-=======
-import { ChitMembers } from "@/admin/types/chit.type";
->>>>>>> 4c963b6 (added auth):app/admin/chits/[id]/paymentModal.tsx
+import { ChitMembers, ChitPayments } from "@/admin/types/chit.type";
 
 // Sample Members Data
 export interface AddPaymentPayload {

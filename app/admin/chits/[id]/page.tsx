@@ -26,12 +26,8 @@ import {
   ChitInstallement,
   ChitMembers,
   ChitPayments,
-<<<<<<< HEAD:app/[portal]/admin/chits/[id]/page.tsx
-} from "@admin/types/chit.type";
-import { CardFormData, ShareCardModal } from "./CardForm";
-=======
 } from "@/admin/types/chit.type";
->>>>>>> 4c963b6 (added auth):app/admin/chits/[id]/page.tsx
+import { CardFormData, ShareCardModal } from "./CardForm";
 
 export default function ChitDetail() {
   const columns = [
