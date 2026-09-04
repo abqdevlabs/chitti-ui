@@ -27,6 +27,12 @@ export function SideNavbar({ currentPath, onSelect }: SideNavbarProps) {
     { id: "chits", label: "Chits", icon: Gavel, route: "/admin/chits" },
     { id: "members", label: "Members", icon: Users, route: "/admin/members" },
     {
+      id: "expenses",
+      label: "Expenses",
+      icon: PiggyBank,
+      route: "/admin/expense",
+    },
+    {
       id: "payments",
       label: "Payments",
       icon: CreditCard,

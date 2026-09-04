@@ -88,6 +88,8 @@
       "total": "Total",
       "totalPlaceholder": "10,00,000",
       "auctionedAmount": "Auctioned Amount",
+      "auctionWinner": "Auction Winner",
+
       "auctionedAmountPlaceholder": "10,000",
       "duePayment": "Due Payment",
       "duePaymentPlaceholder": "5,000",
@@ -121,6 +123,7 @@
       "startYear": "Start Year",
       "auctionday": "Auction Day",
       "paymentday": "Payment Day",
+
       "allmonth": "Every Month",
       "date": "Day"
     },

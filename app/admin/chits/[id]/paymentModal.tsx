@@ -1,21 +1,35 @@
 import React, { useState } from "react";
 import { X, User } from "lucide-react";
-import { ChitMembers } from "@/admin/types/chit.type";
+import { ChitMembers, ChitPayments } from "@/admin/types/chit.type";
 
 // Sample Members Data
+export interface AddPaymentPayload {
+  payId: string;
+  upi: number;
+  cash: number;
+  toPay: number;
 
+  paymentDate: string;
+  notes: string;
+}
 export function RecordPaymentModal({
+  payments,
   members,
   isOpen = true,
   onClose,
   installment,
+  onSave,
 }: {
+  payments: ChitPayments[];
   members: ChitMembers[];
   isOpen: boolean;
   onClose: () => void;
   installment: string;
+  onSave: (data: AddPaymentPayload) => void;
 }) {
-  const [selectedMemberId, setSelectedMemberId] = useState(members[0].id);
+  const [selectedMemberId, setSelectedMemberId] = useState(
+    members[0]?.id ?? "",
+  );
   const [upiAmount, setUpiAmount] = useState("");
   const [cashAmount, setCashAmount] = useState("");
   const [paymentDate, setPaymentDate] = useState("2026-07-21");
@@ -30,18 +44,23 @@ export function RecordPaymentModal({
   // Calculate total dynamically
   const totalAmount =
     (parseFloat(upiAmount) || 0) + (parseFloat(cashAmount) || 0);
-
+  const toPay =
+    payments?.find((a) => a.memberId === selectedMember.id)?.net ?? 0;
   const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     const payload = {
-      member: selectedMember,
-      upiAmount: parseFloat(upiAmount) || 0,
-      cashAmount: parseFloat(cashAmount) || 0,
-      totalAmount,
+      memberId: selectedMember.id,
+      upi: parseFloat(upiAmount) || 0,
+      cash: parseFloat(cashAmount) || 0,
+      toPay: payments?.find((a) => a.memberId === selectedMember.id)?.net ?? 0,
+      payId:
+        payments?.find((a) => a.memberId === selectedMember.id)?.pay_id ?? "",
+
       paymentDate,
       notes,
     };
-    console.log("Recorded Payment:", payload);
+    onSave(payload);
+
     if (onClose) onClose();
   };
 
@@ -144,6 +163,18 @@ export function RecordPaymentModal({
                     Installment
                   </span>
                   <span className="text-sm font-semibold">{installment}</span>
+                </div>
+                <div>
+                  <span className="block font-bold uppercase tracking-wider text-text-secondary text-[10px]">
+                    To Pay
+                  </span>
+                  <span className="text-sm font-semibold">
+                    {toPay.toLocaleString("en-IN", {
+                      currency: "INR",
+                      style: "currency",
+                      maximumFractionDigits: 0,
+                    })}
+                  </span>
                 </div>
               </div>
             </div>

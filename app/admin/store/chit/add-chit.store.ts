@@ -1,5 +1,5 @@
-import { AddChit } from "@/admin/types/chit.type";
 import { create } from "zustand";
+import { AddChit } from "@app/admin/types/chit.type";
 
 const initialState: AddChit = {
   name: "",
@@ -18,13 +18,11 @@ const initialState: AddChit = {
 
 interface AddSchemeStore {
   scheme: AddChit;
-
   setField: <K extends keyof AddChit>(field: K, value: AddChit[K]) => void;
   toggleMember: (id: string) => void;
   selectAllMembers: (ids: string[]) => void;
   removeMember: (id: string) => void;
   setScheme: (scheme: Partial<AddChit>) => void;
-
   reset: () => void;
 }
 
@@ -46,11 +44,13 @@ export const useAddSchemeStore = create<AddSchemeStore>((set) => ({
         ...scheme,
       },
     })),
-  toggleMember: (id) =>
+
+  toggleMember: (id: string) =>
     set((state) => {
-      const membersId = state.scheme.membersId.includes(id)
-        ? state.scheme.membersId.filter((x: string) => x !== id)
-        : [...state.scheme.membersId, id];
+      const currentMembers = state.scheme?.membersId ?? [];
+      const membersId = currentMembers.includes(id)
+        ? currentMembers.filter((x: string) => x !== id)
+        : [...currentMembers, id];
 
       return {
         scheme: {
@@ -59,19 +59,24 @@ export const useAddSchemeStore = create<AddSchemeStore>((set) => ({
         },
       };
     }),
+
   removeMember: (id: string) =>
     set((state) => ({
       scheme: {
         ...state.scheme,
-        // This will always filter out the ID, ensuring it is removed safely
-        membersId: state.scheme.membersId.filter((x: string) => x !== id),
+        membersId: (state.scheme?.membersId ?? []).filter(
+          (x: string) => x !== id,
+        ),
       },
     })),
+
   selectAllMembers: (ids: string[]) =>
     set((state) => ({
       scheme: {
         ...state.scheme,
-        membersId: Array.from(new Set([...state.scheme.membersId, ...ids])),
+        membersId: Array.from(
+          new Set([...(state.scheme?.membersId ?? []), ...ids]),
+        ),
       },
     })),
 

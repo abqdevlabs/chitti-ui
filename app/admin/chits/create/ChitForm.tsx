@@ -28,7 +28,7 @@ import { MemberSelector } from "./MemberListCard";
 import { AddChit } from "@/admin/types/chit.type";
 import { MemberList } from "@/admin/types/member.type";
 import { MonthSelect } from "../[id]/List";
-import { useTranslation } from "react-i18next";
+import { useAddSchemeStore } from "@/admin/store/chit/add-chit.store";
 type props = {
   chit: AddChit;
   setField: <K extends keyof AddChit>(field: K, value: AddChit[K]) => void;
@@ -103,20 +103,48 @@ export function ChitCreateModal({
     { id: 3, title: "Review", description: "Review and finish" },
   ];
   const [currentStep, setCurrentStep] = useState(1);
-  const [selectedIds, setSelectedIds] = useState<string[]>([]);
+  const scheme = useAddSchemeStore((state) => state.scheme);
+  const toggleMember = useAddSchemeStore((state) => state.toggleMember);
+  const selectAllMembers = useAddSchemeStore((state) => state.selectAllMembers);
 
-  const handleToggle = (id: string, checked: boolean) => {
-    if (checked) {
-      setSelectedIds((prev) => [...prev, id]);
+  const selectedIds = scheme.membersId ?? [];
+  const allMemberIds = members.map((m) => m.id);
+  const isAllSelected =
+    members.length > 0 && allMemberIds.every((id) => selectedIds.includes(id));
 
-      toggle(id);
+  const handleSelectAll = () => {
+    if (isAllSelected) {
+      setField("membersId", []);
     } else {
-      setSelectedIds((prev) => prev.filter((item) => item !== id));
-
-      remove(id);
+      selectAllMembers(allMemberIds);
     }
   };
-  console.log("DATA", chit.commission, chit.duration, chit.monthly, chit.total);
+
+  const handleSubmit = () => {
+    onSave(scheme);
+  };
+  //   const handleToggle = (id: string, checked: boolean) => {
+  //     if (checked) {
+  //       setSelectedIds((prev) => [...prev, id]);
+  //       setField("membersId", selectedIds);
+  //     } else {
+  //       setSelectedIds((prev) => prev.filter((item) => item !== id));
+  //       setField("membersId", selectedIds);
+  //     }
+  //   };
+
+  // const handleToggle = (id: string, checked: boolean) => {
+  //   if (checked) {
+  //     setSelectedIds((prev) => [...prev, id]);
+
+  //     toggle(id);
+  //   } else {
+  //     setSelectedIds((prev) => prev.filter((item) => item !== id));
+
+  //     remove(id);
+  //   }
+  // };
+
   return (
     <div>
       <Card className="w-full max-w-xl h-auto mx-auto flex flex-col justify-between">
@@ -182,10 +210,10 @@ export function ChitCreateModal({
                     />
                   </Field>
 
-                  <FieldGroup className="grid grid-cols-2 gap-4 max-w-md">
+                  <FieldGroup className="grid grid-cols-1 gap-4 max-w-md sm:grid-cols-2">
                     <Field>
                       <FieldLabel htmlFor="total">
-                        {t("chitRegistration.fields.total")}
+                        {t("fields.total")}
                       </FieldLabel>
                       <Input
                         id="total"
@@ -345,7 +373,7 @@ export function ChitCreateModal({
                     name={member.name}
                     phoneOrId={member.phone}
                     isSelected={selectedIds.includes(member.id)}
-                    onToggle={handleToggle}
+                    onToggle={toggleMember}
                   />
                 ))}
               </div>
@@ -364,17 +392,17 @@ export function ChitCreateModal({
             </CardHeader>
             <CardContent className="space-y-6">
               {/* Read-only Summary Cards */}
-              <div className="grid grid-cols-2 gap-4 bg-muted/40 p-4 rounded-lg border border-border">
+              <div className="grid grid-cols-1 gap-4 bg-muted/40 p-4 rounded-lg border border-border sm:grid-cols-2">
                 <div>
                   <p className="text-xs text-muted-foreground">
                     {" "}
-                    {t("chitRegistration.fields.name")}
+                    {t("fields.name")}
                   </p>
                   <p className="font-semibold text-sm">{chit.name}</p>
                 </div>
                 <div>
                   <p className="text-xs text-muted-foreground">
-                    {t("chitRegistration.fields.total")}
+                    {t("fields.total")}
                   </p>
                   <p className="font-semibold text-sm">
                     {chit.total.toLocaleString("en-IN")}
@@ -382,7 +410,7 @@ export function ChitCreateModal({
                 </div>
                 <div>
                   <p className="text-xs text-muted-foreground">
-                    {t("chitRegistration.fields.duration")}
+                    {t("fields.duration")}
                   </p>
                   <p className="font-semibold text-sm">
                     {chit.duration} Months
@@ -390,7 +418,7 @@ export function ChitCreateModal({
                 </div>
                 <div>
                   <p className="text-xs text-muted-foreground">
-                    {t("chitRegistration.fields.monthly")}
+                    {t("fields.monthly")}
                   </p>
                   <p className="font-semibold text-sm">
                     {chit.monthly.toLocaleString("en-IN")}
@@ -398,21 +426,19 @@ export function ChitCreateModal({
                 </div>
                 <div>
                   <p className="text-xs text-muted-foreground">
-                    {t("chitRegistration.fields.paymentday")}
+                    {t("fields.paymentday")}
                   </p>
                   <p className="font-semibold text-sm">
                     {" "}
-                    {t("chitRegistration.fields.allmonth")} {chit.paymentDay}{" "}
-                    {t("chitRegistration.fields.date")}
+                    {t("fields.allmonth")} {chit.paymentDay} {t("fields.date")}
                   </p>
                 </div>
                 <div>
                   <p className="text-xs text-muted-foreground">
-                    {t("chitRegistration.fields.auctionday")}
+                    {t("fields.auctionday")}
                   </p>
                   <p className="font-semibold text-sm">
-                    {t("chitRegistration.fields.allmonth")} {chit.auctionDay}{" "}
-                    {t("chitRegistration.fields.date")}
+                    {t("fields.allmonth")} {chit.auctionDay} {t("fields.date")}
                   </p>
                 </div>
                 <div>

@@ -35,6 +35,7 @@ export interface ChitData {
     cash: number;
   }[];
   due_members?: {
+    id: string;
     name: string;
     amount: number;
   }[];
@@ -51,9 +52,14 @@ export interface ChitPayments {
   id: string;
   pay_id: string;
   status: string;
+  memberId: string;
+  member_name: string;
+  member_phone: string;
   due_amt: number;
+  discount_amt: number;
   upi: number;
   cash: number;
+  net: number;
   name: string;
 }
 

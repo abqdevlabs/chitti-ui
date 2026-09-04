@@ -1,0 +1,112 @@
+{
+  "cardForm": {
+    "title": "அட்டையை உருவாக்கு",
+    "description": "கட்டமைப்பை அமைக்க முதன்மை விவரங்களை உள்ளிடவும்.",
+    "fields": {
+      "fullName": "முழு பெயர்",
+      "fullNamePlaceholder": "தீபாவளி சீட்டு",
+      "groupNo": "குருப் நெ",
+      "cycleNo": "தவணை நெ",
+      "date": "தேதி",
+      "time": "நேரம்",
+      "cycleNoPlaceholder": "12",
+      "timePlaceholder": "இரவு 9 மணி",
+      "total": "மொத்தம்",
+      "totalPlaceholder": "10,00,000",
+      "auctionedAmount": "ஏலத் தொகை",
+      "auctionWinner": "ஏலம் வென்றவர்",
+
+      "auctionedAmountPlaceholder": "10,000",
+      "duePayment": "செலுத்த வேண்டிய தொகை",
+      "duePaymentPlaceholder": "5,000",
+      "discountAmount": "கசர் தொகை",
+      "discountAmountPlaceholder": "5,000"
+    },
+    "actions": {
+      "submit": "கட்டமைப்பு அட்டையை உருவாக்கு"
+    }
+  },
+  "chitRegistration": {
+    "sections": {
+      "basic": {
+        "title": "சிட்டு திட்ட விவரங்கள்",
+        "description": "சிட்டு திட்டத்தின் அடிப்படை விவரங்களை அமைக்கவும்."
+      },
+      "finance": {
+        "title": "நிதி விவரங்கள்",
+        "description": "மாத தவணை, உறுப்பினர் நெணிக்கை மற்றும் கமிஷனை அமைக்கவும்."
+      }
+    },
+    "fields": {
+      "name": "திட்டத்தின் பெயர்",
+      "total": "மொத்த சிட்டு மதிப்பு",
+      "monthly": "மாத தவணை",
+      "members": "மொத்த உறுப்பினர்கள்",
+      "duration": "கால அளவு",
+      "durationUnit": "கால அலகு",
+      "commission": "கமிஷன் (%)",
+      "startmonth": "தொடங்கும் மாதம்",
+      "auctionday": "ஏல நாள்",
+      "paymentday": "பணம் செலுத்தும் நாள்",
+      "allmonth": "பிரதி மாதம்",
+      "date": "ஆம் நாள்"
+    },
+    "placeholders": {
+      "name": "பிரீமியம் கோல்டு சிட்டு",
+      "total": "500000",
+      "monthly": "10000",
+      "members": "50",
+      "duration": "50",
+      "commission": "5"
+    },
+    "units": {
+      "month": "மாதம்"
+    },
+    "buttons": {
+      "save": "திட்டத்தை சேமி",
+      "cancel": "ரத்து செய்"
+    }
+  },
+  "memberRegistration": {
+    "create": {
+      "title": "Add Members",
+      "selectall": "Select All",
+      "add": "Add Member",
+      "description": "Assign members to the Chit"
+    },
+    "sections": {
+      "personal": {
+        "title": "தனிப்பட்ட தகவல்கள்",
+        "description": "உறுப்பினரின் அடிப்படை விவரங்களை உள்ளிடவும்."
+      },
+      "kyc": {
+        "title": "KYC தகவல்கள்",
+        "description": "அடையாளச் சரிபார்ப்பு ஆவணங்களை வழங்கவும்."
+      },
+      "nominee": {
+        "title": "நியமனதாரர் தகவல்கள்",
+        "description": "தேவைப்பட்டால் நன்மைகளைப் பெறும் நபரின் விவரங்கள்."
+      }
+    },
+    "fields": {
+      "fullName": "முழு பெயர்",
+      "email": "மின்னஞ்சல் முகவரி",
+      "mobile": "மொபைல் நெ",
+      "dob": "பிறந்த தேதி",
+      "aadhaar": "ஆதார் நெ",
+      "pan": "PAN நெ",
+      "document": "ஆதார் / PAN ஆவணம்",
+      "nomineeName": "நியமனதாரர் பெயர்",
+      "relation": "உறவு"
+    },
+    "placeholders": {
+      "fullName": "ஜான் டோ",
+      "email": "john@example.com",
+      "mobile": "+91 9876543210",
+      "aadhaar": "1234 5678 9012",
+      "pan": "ABCDE1234F",
+      "nomineeName": "ஜேன் டோ",
+      "relation": "மனைவி"
+    }
+  }
+}

@@ -16,6 +16,7 @@ import { RecordPaymentModal } from "./paymentModal";
 import { useEffect, useRef, useState } from "react";
 import {
   useCreateAuctionWinner,
+  useCreatePayment,
   useGetChitData,
   useGetChitInstallments,
   useGetChitMembers,
@@ -26,6 +27,7 @@ import {
   ChitMembers,
   ChitPayments,
 } from "@/admin/types/chit.type";
+import { CardFormData, ShareCardModal } from "./CardForm";
 
 export default function ChitDetail() {
   const columns = [
@@ -72,6 +74,7 @@ export default function ChitDetail() {
   const { data: chitMembers, isLoading: chitMembersLoading } =
     useGetChitMembers(chitId ?? "");
   const { mutate } = useCreateAuctionWinner();
+  const { mutate: CreatePayment } = useCreatePayment();
   console.log(installments);
   // Initialize empty
   const [selectedInstallmentId, setSelectedInstallmentId] = useState<
@@ -83,6 +86,9 @@ export default function ChitDetail() {
   );
 
   const installmentId = selectedInstallmentId ?? defaultInstallment?.id;
+  const [payment, setPayment] = useState<CardFormData>();
+
+  const [view, setView] = useState(false);
 
   // Enabled query automatically waits until installmentId is non-empty
   const { data, isLoading } = useGetChitData(chitId, installmentId ?? "");
@@ -123,6 +129,40 @@ export default function ChitDetail() {
   const dueCount =
     data?.payments?.filter((a: ChitPayments) => a.status === "due").length ?? 0;
   const totalPaymentsAmount = (data?.paidUPI ?? 0) + (data?.paidCash ?? 0);
+  function onView(dat: ChitPayments) {
+    const da = {
+      name: data?.name ?? "",
+      member_name: dat.member_name,
+      groupNo: data?.installments ?? "",
+      cycleNo: data?.installments ?? "",
+      date: new Date().toISOString(),
+      auction_amt:
+        data?.auction_winner === null ? "0" : formatCurrency(data?.auction_amt),
+      auction_winner:
+        data?.auction_winner === null
+          ? "No Winner"
+          : (data?.auction_winner ?? "N/A"),
+      time: "9 AM",
+      total: (data?.toPay ?? 0).toLocaleString("en-IN"),
+      phone: "7010497689",
+      auctioned: (data?.auction_amt ?? 0).toLocaleString("en-IN"),
+      due: (dat.net ?? 0).toLocaleString("en-IN"),
+      discount: (dat.discount_amt ?? 0).toLocaleString("en-IN"),
+    };
+    setPayment(da);
+    setView(true);
+  }
+  const unPaidId = data?.payments
+    .filter((a) => a.status != "paid")
+    .map((s) => s.memberId);
+
+  const dueMembersSet = new Set(unPaidId);
+  console.log("INSTLMENT ID", installmentId);
+  // 2. Filter chitMembers to get only matching user objects
+  const presentMembers =
+    chitMembers?.filter(
+      (member) => dueMembersSet.has(member.id), // Replace 'id' with your property name (e.g. memberId, userId)
+    ) ?? [];
 
   if (isLoading || chitMembersLoading || installmentsLoading) {
     return <div>Loading...</div>;
@@ -130,11 +170,24 @@ export default function ChitDetail() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-8 pb-24 md:pb-8">
       {/* Modals */}
+      {view && payment && (
+        <div>
+          <ShareCardModal
+            isOpen={view}
+            onClose={() => setView(false)}
+            formData={payment}
+          />
+        </div>
+      )}
       <RecordPaymentModal
         installment={data?.installments ?? ""}
-        members={chitMembers ?? []}
+        payments={data?.payments ?? []}
+        members={presentMembers ?? []}
         isOpen={open}
         onClose={() => setOpen(false)}
+        onSave={(data) => {
+          CreatePayment({ data, chitId, installmentId: installmentId ?? "" });
+        }}
       />
       <AuctionModal
         chitId={data?.id ?? ""}
@@ -305,6 +358,7 @@ export default function ChitDetail() {
               <span className="text-xs font-semibold text-text-secondary uppercase tracking-wider">
                 Auction Amount
               </span>
+
               <Gavel className="w-4 h-4 text-text-secondary" />
             </div>
             <p className="text-2xl font-bold tracking-tight text-text-primary">
@@ -316,18 +370,29 @@ export default function ChitDetail() {
         </div>
 
         {/* Auction Winner Card */}
-        <div className="p-5 bg-card rounded-2xl border border-border shadow-xs flex flex-col justify-between">
+        <div className="p-5 bg-card rounded-2xl border border-border shadow-xs flex flex-col justify-between h-full">
           <div>
+            {/* Header: Label + Icon */}
             <div className="flex items-center justify-between mb-2">
               <span className="text-xs font-semibold text-text-secondary uppercase tracking-wider">
                 Auction Winner
               </span>
               <Trophy className="w-4 h-4 text-text-secondary" />
             </div>
-            <p className="text-2xl font-bold tracking-tight text-text-primary truncate">
+
+            {/* Winner Name */}
+            <p className="text-2xl font-bold tracking-tight text-text-primary truncate mb-1">
               {data?.auction_winner === null
                 ? "No Winner"
                 : (data?.auction_winner ?? "N/A")}
+            </p>
+
+            {/* Winning Amount / Payout */}
+            <p className="text-sm font-semibold text-text-secondary">
+              Amount:{" "}
+              <span className="text-text-primary font-bold">
+                {formatCurrency((data?.toPay ?? 0) - (data?.auction_amt ?? 0))}
+              </span>
             </p>
           </div>
         </div>
@@ -364,6 +429,7 @@ export default function ChitDetail() {
           columns={columns}
           searchKey="name"
           searchPlaceholder="Filter users by name..."
+          onEdit={(data) => onView(data)}
         />
       </div>
 

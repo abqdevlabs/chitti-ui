@@ -1,5 +1,4 @@
 import React from "react";
-// Assuming these are your local UI imports (e.g., Shadcn or custom components)
 import { Checkbox } from "@/components/ui/checkbox";
 
 interface MemberSelectorProps {
@@ -7,7 +6,7 @@ interface MemberSelectorProps {
   name: string;
   phoneOrId: string;
   isSelected: boolean;
-  onToggle: (id: string, checked: boolean) => void;
+  onToggle: (id: string) => void;
 }
 
 export const MemberSelector: React.FC<MemberSelectorProps> = ({
@@ -19,30 +18,40 @@ export const MemberSelector: React.FC<MemberSelectorProps> = ({
 }) => {
   return (
     <div
-      // Toggles selection on card click
-      onClick={() => onToggle(id, !isSelected)}
-      className={
-        "flex  rounded-lg cursor-pointer select-none transition-all duration-200 border-border hover:bg-muted/50 hover:border-muted-foreground/30"
-      }
+      role="button"
+      tabIndex={0}
+      aria-pressed={isSelected}
+      onClick={() => onToggle(id)}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          onToggle(id);
+        }
+      }}
+      className={`
+        flex items-center justify-between p-3.5 rounded-lg border cursor-pointer select-none 
+        transition-all duration-200 
+        ${
+          isSelected
+            ? "border-primary bg-primary/5 text-primary shadow-xs"
+            : "border-border hover:bg-muted/50 hover:border-muted-foreground/30"
+        }
+      `}
     >
-      {/* Member Details */}
-      {/* 1. Added "w-full justify-between items-center" */}
-      <div className="flex flex-row w-full justify-between items-center">
-        {/* Left: Member Info */}
-        <div className="flex flex-col gap-0.5 pointer-events-none">
-          <p className="text-text-primary font-semibold text-sm">{name}</p>
-          <p className="text-text-secondary font-medium text-xs">
-            ID: {phoneOrId}
-          </p>
-        </div>
+      {/* Left: Member Info */}
+      <div className="flex flex-col gap-0.5">
+        <p className="font-semibold text-sm text-foreground">{name}</p>
+        <p className="font-medium text-xs text-muted-foreground">
+          ID: {phoneOrId}
+        </p>
+      </div>
 
-        {/* Right: Selector Checkbox */}
+      {/* Right: Selector Checkbox */}
+      <div className="pointer-events-none">
         <Checkbox
           id={`member-select-${id}`}
           checked={isSelected}
-          onCheckedChange={(checked) => onToggle(id, !!checked)}
-          // Stops click event bubbling to prevent double-toggling when clicking the checkbox itself
-          onClick={(e) => e.stopPropagation()}
+          tabIndex={-1}
         />
       </div>
     </div>
