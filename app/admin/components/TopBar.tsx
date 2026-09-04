@@ -2,6 +2,7 @@
 
 import { Menu, Search, Bell, Settings } from "lucide-react";
 import Image from "next/image";
+import { useAuth } from "@/context/authContext";
 
 interface TopBarProps {
   user?: {
@@ -12,6 +13,10 @@ interface TopBarProps {
 }
 
 export function TopBar({ user, onMenuClick }: TopBarProps) {
+  const { user: authenticatedUser } = useAuth();
+  const displayName = user?.name ?? authenticatedUser?.email ?? "User";
+  const roleLabel = authenticatedUser?.role === "admin" ? "Admin" : "Member";
+
   // Extract initials for the avatar fallback
   const getInitials = (name: string) => {
     return name
@@ -95,17 +100,17 @@ export function TopBar({ user, onMenuClick }: TopBarProps) {
                   className="object-cover"
                 />
               ) : (
-                <span>{getInitials(user?.name ?? "Administrator")}</span>
+                <span>{getInitials(displayName)}</span>
               )}
             </div>
 
             {/* User Metadata - Hidden on mobile, pops in at 'md' layout */}
             <div className="hidden pr-2 text-left md:block">
-              <p className="max-w-[120px] truncate text-xs font-semibold text-on-surface leading-tight">
-                {user?.name ?? "Administrator"}
+              <p className="max-w-30 truncate text-xs font-semibold text-on-surface leading-tight">
+                {displayName}
               </p>
               <p className="text-[10px] text-on-surface-variant leading-none mt-0.5">
-                Admin
+                {roleLabel}
               </p>
             </div>
           </button>

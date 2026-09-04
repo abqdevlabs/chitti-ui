@@ -2,7 +2,8 @@
 
 import React, { useState } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { SideNavbar } from "@/admin/components/SideBar";
+import { MemberSidebar } from "./MemberSidebar";
+import { TopBar } from "@/admin/components/TopBar";
 
 export default function AdminLayout({
   children,
@@ -15,7 +16,7 @@ export default function AdminLayout({
   const queryClient = new QueryClient();
   return (
     <div className="relative flex min-h-screen flex-col bg-slate-100/40 font-sans">
-      {/* Top Header - Sticky across admin pages */}
+      <TopBar onMenuClick={() => setIsSidebarOpen((isOpen) => !isOpen)} />
 
       <div className="flex flex-1">
         {/* Mobile Sidebar Backdrop Overlay */}
@@ -35,11 +36,11 @@ export default function AdminLayout({
   ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}
 `}
         >
-          <SideNavbar
+          <MemberSidebar
             currentPath={selectedSideBar}
             onSelect={(c) => {
               setSelectedSideBar(c);
-              console.log(c);
+              setIsSidebarOpen(false);
             }}
           />
         </div>

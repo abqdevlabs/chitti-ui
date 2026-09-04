@@ -81,7 +81,7 @@ export default function ChitsPage() {
           members={members ?? []}
           toggle={toggle}
           remove={remove}
-          setMemberOpen={(open) => setMemberOpen(open)}
+          // setMemberOpen={(open) => setMemberOpen(open)}
         />
       )}
       <div className="container mx-auto py-10">

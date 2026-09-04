@@ -1,7 +1,7 @@
 "use client";
 
 import { api } from "@/api";
-import { useRouter } from "next/navigation";
+import type { Role } from "@/routes";
 import type { ReactNode } from "react";
 import {
   createContext,
@@ -13,10 +13,10 @@ import {
 
 // ================= TYPES =================
 
-type User = {
+export type User = {
   id: string;
   email: string;
-  role: "INSTRUCTOR" | "STUDENT";
+  role: Role;
 } | null;
 
 type AuthContextType = {
@@ -36,25 +36,38 @@ type AuthContextType = {
 
 const AuthContext = createContext<AuthContextType | null>(null);
 
+const getUserFromResponse = (data: unknown): User => {
+  if (!data || typeof data !== "object") {
+    throw new Error("Invalid authenticated user response");
+  }
+
+  const userData = data as Record<string, unknown>;
+  const { id, email, role } = userData;
+
+  if (
+    typeof id !== "string" ||
+    typeof email !== "string" ||
+    (role !== "admin" && role !== "member")
+  ) {
+    throw new Error("Invalid authenticated user response");
+  }
+
+  return { id, email, role };
+};
+
 // ================= PROVIDER =================
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   // ✅ ALL hooks at top (NO conditions above this)
   const [user, setUser] = useState<User>(null);
   const [loading, setLoading] = useState(true);
-  const router = useRouter();
-
   // ================= REFRESH USER =================
 
   const refreshUser = useCallback(async () => {
     try {
       const res = await api.get("/auth/me");
 
-      const userData: User = {
-        id: res.data.id,
-        email: res.data.email,
-        role: res.data.role,
-      };
+      const userData = getUserFromResponse(res.data);
 
       setUser(userData);
     } catch (err) {
@@ -73,11 +86,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
       const res = await api.get("/auth/me");
 
-      const userData: User = {
-        id: res.data.id,
-        email: res.data.email,
-        role: res.data.role,
-      };
+      const userData = getUserFromResponse(res.data);
 
       setUser(userData);
       return userData; // ✅
@@ -97,11 +106,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
       const res = await api.get("/auth/me");
 
-      const userData: User = {
-        id: res.data.id,
-        email: res.data.email,
-        role: res.data.role,
-      };
+      const userData = getUserFromResponse(res.data);
 
       setUser(userData);
 

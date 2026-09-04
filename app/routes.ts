@@ -1,4 +1,6 @@
+export type Role = "admin" | "member";
+
 export const ROLE_ROUTES = {
   admin: "/admin/dashboard",
   member: "/member/dashboard",
-} as const;
+} satisfies Record<Role, string>;

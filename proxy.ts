@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { importSPKI, jwtVerify } from "jose";
-import { ROLE_ROUTES } from "@/routes";
+import { ROLE_ROUTES, type Role } from "@/routes";
 
 const PUBLIC_ROUTES = ["/", "/login", "/register"];
 
@@ -27,22 +27,26 @@ export async function proxy(req: NextRequest) {
       process.env.NEXT_PUBLIC_JWT_PUBLIC_KEY!.replace(/\\n/g, "\n"),
       "RS256",
     );
-    const { payload } = await jwtVerify<{
-      role: "admin" | "member";
-    }>(token, publicKey);
+    const { payload } = await jwtVerify<{ role?: unknown }>(token, publicKey);
 
     const role = payload.role;
 
-    // Logged in users shouldn't visit login/register
-    if (isPublic) {
-      return NextResponse.redirect(new URL(ROLE_ROUTES[role], req.url));
+    if (role !== "admin" && role !== "member") {
+      throw new Error("Invalid role claim");
     }
 
-    if (pathname.startsWith("/admin") && role !== "admin") {
+    const userRole: Role = role;
+
+    // Logged in users shouldn't visit login/register
+    if (isPublic) {
+      return NextResponse.redirect(new URL(ROLE_ROUTES[userRole], req.url));
+    }
+
+    if (pathname.startsWith("/admin") && userRole !== "admin") {
       return NextResponse.redirect(new URL(ROLE_ROUTES.member, req.url));
     }
 
-    if (pathname.startsWith("/member") && role !== "member") {
+    if (pathname.startsWith("/member") && userRole !== "member") {
       return NextResponse.redirect(new URL(ROLE_ROUTES.admin, req.url));
     }
 
